@@ -11,10 +11,10 @@
   const NAV_HTML = `
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="JAVICO">
-        <span class="logo-box">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 3 L21 19 L3 19 Z" fill="#fff"/>
-            <path d="M12 8 L17 17 L7 17 Z" fill="#FF6B6B"/>
+        <span class="logo-box" style="background:#1A1A1A;display:flex;align-items:center;justify-content:center;">
+          <svg width="28" height="28" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="21" cy="21" r="17" fill="#FF6B6B"/>
+            <polygon points="21,9 32,30 10,30" fill="#1A1A1A"/>
           </svg>
         </span>
         <span class="brand-name">JAVICO<br><small style="font-weight:500;color:#888">Du học Đài Loan</small></span>
