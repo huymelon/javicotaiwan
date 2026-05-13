@@ -11,11 +11,8 @@
   const NAV_HTML = `
     <div class="nav-inner">
       <a href="index.html" class="brand" aria-label="JAVICO">
-        <span class="logo-box" style="background:#111;display:flex;align-items:center;justify-content:center;">
-          <svg width="30" height="30" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="21" cy="21" r="18" fill="#CC0000"/>
-            <path d="M21,6 Q16,19 9,30 Q21,25 33,30 Q26,19 21,6 Z" fill="#111111"/>
-          </svg>
+        <span class="logo-box" style="background:#000;display:flex;align-items:center;justify-content:center;padding:2px;">
+          <img src="img/Logo JVC unlock BG.png" alt="JAVICO" width="38" height="38" style="display:block;object-fit:contain;">
         </span>
         <span class="brand-name">JAVICO<br><small style="font-weight:500;color:#888">Du học Đài Loan</small></span>
       </a>
@@ -51,11 +48,8 @@
     <div class="footer-inner">
       <div class="footer-col footer-brand">
         <a href="index.html" class="brand" style="margin-bottom:14px;">
-          <span class="logo-box" style="background:#111;display:flex;align-items:center;justify-content:center;">
-            <svg width="26" height="26" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="21" cy="21" r="18" fill="#CC0000"/>
-              <path d="M21,6 Q16,19 9,30 Q21,25 33,30 Q26,19 21,6 Z" fill="#111111"/>
-            </svg>
+          <span class="logo-box" style="background:#000;display:flex;align-items:center;justify-content:center;padding:2px;">
+            <img src="img/Logo JVC unlock BG.png" alt="JAVICO" width="34" height="34" style="display:block;object-fit:contain;">
           </span>
           <span class="footer-logo" style="margin:0;">JAVICO</span>
         </a>
