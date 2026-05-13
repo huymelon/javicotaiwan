@@ -1,261 +1,353 @@
-/* ============================================================
-   JAVICO – Du Học Đài Loan | main.js
-   Shared nav/footer injection + UI interactions
-   ============================================================ */
+/* =====================================================
+   JAVICO — main.js
+   Inject nav/footer + interactions (FAQ, counter, reveal, FAB, mobile menu)
+   ===================================================== */
+(function () {
+  'use strict';
 
-/* ----------------------------------------------------------
-   1. SHARED NAV HTML
----------------------------------------------------------- */
-const NAV_HTML = `
-<div class="nav-inner">
-  <a href="/index.html" class="nav-logo">
-    <span class="nav-logo-star">★</span> JAVICO
-  </a>
-  <nav class="nav-links" id="nav-links">
-    <a href="/index.html" data-page="index">Trang chủ</a>
-    <a href="/cac-he.html" data-page="cac-he">Các hệ đào tạo</a>
-    <a href="/truong-doi-tac.html" data-page="truong-doi-tac">Trường đối tác</a>
-    <a href="/chi-phi.html" data-page="chi-phi">Chi phí</a>
-    <a href="/dang-ky.html" data-page="dang-ky" class="nav-cta">Đăng ký ngay</a>
-  </nav>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</div>
-`;
-
-/* ----------------------------------------------------------
-   2. SHARED FOOTER HTML
----------------------------------------------------------- */
-const FOOTER_HTML = `
-<div class="footer-inner">
-  <div class="footer-col footer-brand">
-    <div class="footer-logo">★ JAVICO</div>
-    <p>Tư vấn du học Đài Loan uy tín – minh bạch – hiệu quả từ 2015.</p>
-    <div class="footer-socials">
-      <a href="https://facebook.com/javico.vn" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+  /* -------------------------------------------------
+     1) NAV + FOOTER MARKUP
+  -------------------------------------------------- */
+  const NAV_HTML = `
+    <div class="nav-inner">
+      <a href="index.html" class="brand" aria-label="JAVICO">
+        <span class="logo-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3 L21 19 L3 19 Z" fill="#fff"/>
+            <path d="M12 8 L17 17 L7 17 Z" fill="#FF6B6B"/>
+          </svg>
+        </span>
+        <span class="brand-name">JAVICO<br><small style="font-weight:500;color:#888">Du học Đài Loan</small></span>
       </a>
-      <a href="https://zalo.me/0983058358" target="_blank" rel="noopener" aria-label="Zalo">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V10h2v6zm4 0h-2v-3.5c0-.83-.67-1.5-1.5-1.5S10 11.67 10 12.5V16H8v-6h2v.93c.48-.57 1.19-.93 2-.93 1.65 0 3 1.35 3 3V16z"/></svg>
-      </a>
-      <a href="https://www.youtube.com/@javico" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1A1A1A"/></svg>
-      </a>
+      <nav class="nav-links" aria-label="Main">
+        <a href="index.html" data-page="index">Trang chủ</a>
+        <a href="cac-he.html" data-page="cac-he">Các hệ</a>
+        <a href="chi-phi.html" data-page="chi-phi">Chi phí</a>
+        <a href="truong-doi-tac.html" data-page="truong-doi-tac">Trường đối tác</a>
+        <a href="dang-ky.html" data-page="dang-ky">Liên hệ</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="tel:0983058358" class="btn btn-outline" aria-label="Hotline">📞 0983 058 358</a>
+        <a href="dang-ky.html" class="btn btn-primary">Đăng ký</a>
+        <button class="burger" id="js-burger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
-  </div>
+    <div class="mobile-menu" id="js-mobile-menu">
+      <a href="index.html" data-page="index">Trang chủ</a>
+      <a href="cac-he.html" data-page="cac-he">Các hệ đào tạo</a>
+      <a href="chi-phi.html" data-page="chi-phi">Chi phí</a>
+      <a href="truong-doi-tac.html" data-page="truong-doi-tac">Trường đối tác</a>
+      <a href="dang-ky.html" data-page="dang-ky">Đăng ký tư vấn</a>
+      <div class="mm-cta">
+        <a href="tel:0983058358" class="btn btn-outline">📞 Gọi</a>
+        <a href="https://zalo.me/0983058358" target="_blank" rel="noopener" class="btn btn-mint">💬 Zalo</a>
+      </div>
+    </div>
+  `;
 
-  <div class="footer-col">
-    <h4>Chương trình</h4>
-    <ul>
-      <li><a href="/cac-he.html#du-bi">Hệ Dự Bị 1+4</a></li>
-      <li><a href="/cac-he.html#vhvl">Vừa Học Vừa Làm</a></li>
-      <li><a href="/cac-he.html#tu-tuc">Hệ Tự Túc</a></li>
-      <li><a href="/cac-he.html#lien-thong">Liên Thông / VB2</a></li>
-      <li><a href="/cac-he.html#thac-si">Thạc Sĩ</a></li>
-      <li><a href="/cac-he.html#ngon-ngu">Khóa Ngôn Ngữ</a></li>
-    </ul>
-  </div>
+  const FOOTER_HTML = `
+    <div class="footer-inner">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="brand" style="margin-bottom:14px;">
+          <span class="logo-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3 L21 19 L3 19 Z" fill="#fff"/>
+              <path d="M12 8 L17 17 L7 17 Z" fill="#FF6B6B"/>
+            </svg>
+          </span>
+          <span class="footer-logo" style="margin:0;">JAVICO</span>
+        </a>
+        <p>Tư vấn du học Đài Loan uy tín từ 2015. Học bổng 100% • Vừa học vừa kiếm xèng • Hỗ trợ A-Z.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5s-.2-1.5-.9-2.2c-.8-.9-1.8-.9-2.2-1C16.6 4 12 4 12 4s-4.6 0-7.9.3c-.4.1-1.4.1-2.2 1C1.2 6 1 7.5 1 7.5S.8 9.3.8 11.1v1.6c0 1.8.2 3.6.2 3.6s.2 1.5.9 2.2c.8.9 1.9.9 2.4 1 1.7.2 7.7.3 7.7.3s4.6 0 7.9-.3c.4-.1 1.4-.1 2.2-1 .7-.7.9-2.2.9-2.2s.2-1.8.2-3.6v-1.6c0-1.8-.2-3.6-.2-3.6zM9.7 14.6V8.4l6 3.1-6 3.1z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.3c-1.4-.1-2.6-1.1-3-2.4 0-.4-.1-.7-.1-1.1h-3.5v14a2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 1 1 0-5c.3 0 .5 0 .8.1V11a6 6 0 1 0 5.2 5.9V9.3c1 .7 2.2 1.1 3.5 1.1V6.9c-.1 0-.3-.5-.4-.6z"/></svg></a>
+          <a href="https://zalo.me/0983058358" target="_blank" rel="noopener" aria-label="Zalo"><strong style="font-size:11px;font-weight:800;">Zalo</strong></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Du học</h4>
+        <ul>
+          <li><a href="cac-he.html">Các hệ đào tạo</a></li>
+          <li><a href="cac-he.html#vhvl">Vừa học vừa làm</a></li>
+          <li><a href="cac-he.html#du-bi">Hệ Dự Bị 1+4</a></li>
+          <li><a href="cac-he.html#thac-si">Hệ Thạc Sĩ</a></li>
+          <li><a href="cac-he.html#ngon-ngu">Khóa Ngôn Ngữ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Thông tin</h4>
+        <ul>
+          <li><a href="truong-doi-tac.html">Trường đối tác</a></li>
+          <li><a href="chi-phi.html">Chi phí</a></li>
+          <li><a href="chi-phi.html#goi-dich-vu">Gói dịch vụ</a></li>
+          <li><a href="chi-phi.html#cam-ket">Cam kết hoàn tiền</a></li>
+          <li><a href="index.html#faq">Câu hỏi thường gặp</a></li>
+        </ul>
+      </div>
+      <div class="footer-col foot-contact">
+        <h4>Liên hệ</h4>
+        <div class="ci">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9 v3 a2 2 0 0 1-2.2 2 a19.8 19.8 0 0 1-8.6-3.1 a19.5 19.5 0 0 1-6-6 a19.8 19.8 0 0 1-3.1-8.7 A2 2 0 0 1 4.1 2 h3 a2 2 0 0 1 2 1.7 c.1.9.3 1.8.6 2.6 a2 2 0 0 1-.5 2.1 L7.9 9.7 a16 16 0 0 0 6 6 l1.3-1.3 a2 2 0 0 1 2.1-.5 c.9.3 1.7.5 2.6.6 a2 2 0 0 1 1.7 2 z"/></svg>
+          <div><a href="tel:0983058358" style="color:inherit;">0983 058 358</a><br><a href="tel:02439911189" style="color:inherit;font-size:12.5px;">024 3991 1189</a></div>
+        </div>
+        <div class="ci">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 H20 a2 2 0 0 1 2 2 V18 a2 2 0 0 1-2 2 H4 a2 2 0 0 1-2-2 V6 a2 2 0 0 1 2-2 z"/><polyline points="22 6 12 13 2 6"/></svg>
+          <span>tuvanduhoc@javico.vn</span>
+        </div>
+        <div class="ci">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Hà Nội &amp; TP. Hồ Chí Minh</span>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 JAVICO – Du học Đài Loan. All rights reserved.</span>
+      <span>Hotline: <a href="tel:0983058358">0983 058 358</a> · Zalo · javico.vn</span>
+    </div>
+  `;
 
-  <div class="footer-col">
-    <h4>Thông tin</h4>
-    <ul>
-      <li><a href="/truong-doi-tac.html">Trường đối tác</a></li>
-      <li><a href="/chi-phi.html">Chi phí du học</a></li>
-      <li><a href="/dang-ky.html">Đăng ký tư vấn</a></li>
-      <li><a href="https://javico.vn/blog" target="_blank">Blog & Kinh nghiệm</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-col footer-contact">
-    <h4>Liên hệ</h4>
-    <ul>
-      <li>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 5.49 5.49l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <a href="tel:0983058358">0983 058 358</a>
-      </li>
-      <li>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 5.49 5.49l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <a href="tel:02439911189">024 3991 1189</a>
-      </li>
-      <li>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        T2–T7: 8:00 – 18:00
-      </li>
-      <li>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Hà Nội & TP. HCM
-      </li>
-    </ul>
-  </div>
-</div>
-<div class="footer-bottom">
-  <p>© 2026 JAVICO. Tư vấn du học Đài Loan. | <a href="https://javico.vn" target="_blank">javico.vn</a></p>
-</div>
-`;
-
-/* ----------------------------------------------------------
-   3. INJECT NAV + FOOTER
----------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
-  // Nav
-  const navEl = document.getElementById('site-nav');
-  if (navEl) {
-    navEl.innerHTML = NAV_HTML;
-    setActiveNav();
-    initBurger();
-    initNavScroll();
-  }
-
-  // Footer
-  const footerEl = document.getElementById('site-footer');
-  if (footerEl) {
-    footerEl.innerHTML = FOOTER_HTML;
-  }
-
-  // Init other UI
-  initFAQ();
-  initSmoothScroll();
-  initCountUp();
-});
-
-/* ----------------------------------------------------------
-   4. ACTIVE NAV LINK
----------------------------------------------------------- */
-function setActiveNav() {
-  const path = window.location.pathname;
-  // Extract page key from path, e.g. "/cac-he.html" → "cac-he"
-  const match = path.match(/\/([^/]+?)(?:\.html)?(?:#.*)?$/);
-  const pageKey = match ? match[1] : 'index';
-
-  document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
-    const lp = link.getAttribute('data-page');
-    if (lp === pageKey || (pageKey === '' && lp === 'index')) {
-      link.classList.add('active');
+  /* -------------------------------------------------
+     2) INJECT NAV + FOOTER
+  -------------------------------------------------- */
+  function injectChrome() {
+    const nav = document.getElementById('site-nav');
+    if (nav && !nav.dataset.injected) {
+      nav.innerHTML = NAV_HTML;
+      nav.dataset.injected = '1';
     }
-  });
-}
-
-/* ----------------------------------------------------------
-   5. BURGER MENU
----------------------------------------------------------- */
-function initBurger() {
-  const burger = document.getElementById('nav-burger');
-  const links  = document.getElementById('nav-links');
-  if (!burger || !links) return;
-
-  burger.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!burger.contains(e.target) && !links.contains(e.target)) {
-      links.classList.remove('open');
-      burger.classList.remove('open');
+    const footer = document.getElementById('site-footer');
+    if (footer && !footer.dataset.injected) {
+      footer.innerHTML = FOOTER_HTML;
+      footer.dataset.injected = '1';
     }
-  });
-
-  // Close on nav link click (mobile)
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      links.classList.remove('open');
-      burger.classList.remove('open');
-    });
-  });
-}
-
-/* ----------------------------------------------------------
-   6. NAV SCROLL SHADOW
----------------------------------------------------------- */
-function initNavScroll() {
-  const nav = document.getElementById('site-nav');
-  if (!nav) return;
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-}
-
-/* ----------------------------------------------------------
-   7. FAQ ACCORDION
----------------------------------------------------------- */
-function initFAQ() {
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const q = item.querySelector('.faq-q');
-    if (!q) return;
-    q.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      // Close all
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      // Toggle clicked
-      if (!isOpen) item.classList.add('open');
-    });
-  });
-}
-
-/* ----------------------------------------------------------
-   8. SMOOTH SCROLL
----------------------------------------------------------- */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const id = anchor.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        const navH = document.getElementById('site-nav')?.offsetHeight || 72;
-        const top = target.getBoundingClientRect().top + window.scrollY - navH - 16;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    });
-  });
-}
-
-/* ----------------------------------------------------------
-   9. COUNT-UP ANIMATION (stats bar)
----------------------------------------------------------- */
-function initCountUp() {
-  const counters = document.querySelectorAll('[data-count]');
-  if (!counters.length) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCount(entry.target);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  counters.forEach(el => observer.observe(el));
-}
-
-function animateCount(el) {
-  const target = parseFloat(el.getAttribute('data-count'));
-  const suffix = el.getAttribute('data-suffix') || '';
-  const duration = 1400;
-  const start = performance.now();
-
-  function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const current = target * eased;
-    el.textContent = (Number.isInteger(target) ? Math.round(current) : current.toFixed(1)) + suffix;
-    if (progress < 1) requestAnimationFrame(update);
+    markActiveNav();
   }
 
-  requestAnimationFrame(update);
-}
+  function markActiveNav() {
+    let page = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
+    if (!page) page = 'index';
+    document.querySelectorAll('[data-page]').forEach(a => {
+      if (a.getAttribute('data-page') === page) a.classList.add('active');
+    });
+  }
 
-/* ----------------------------------------------------------
-   10. FLOATING REGISTER BUTTON (scroll > 600px)
----------------------------------------------------------- */
-window.addEventListener('scroll', () => {
-  const fab = document.getElementById('fab-register');
-  if (!fab) return;
-  fab.classList.toggle('visible', window.scrollY > 600);
-}, { passive: true });
+  /* -------------------------------------------------
+     3) MOBILE MENU
+  -------------------------------------------------- */
+  function setupMobileMenu() {
+    const burger = document.getElementById('js-burger');
+    const menu = document.getElementById('js-mobile-menu');
+    if (!burger || !menu) return;
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      menu.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }));
+  }
+
+  /* -------------------------------------------------
+     4) NAV SCROLLED SHADOW
+  -------------------------------------------------- */
+  function setupNavScroll() {
+    const nav = document.querySelector('header.nav, #site-nav');
+    if (!nav) return;
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* -------------------------------------------------
+     5) FAQ ACCORDION
+  -------------------------------------------------- */
+  function setupFAQ() {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q');
+      if (!q) return;
+      q.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // optional: close siblings for accordion behaviour
+        const list = item.closest('.faq-list');
+        if (list) list.querySelectorAll('.faq-item.open').forEach(o => {
+          if (o !== item) o.classList.remove('open');
+        });
+        item.classList.toggle('open', !isOpen);
+      });
+    });
+  }
+
+  /* -------------------------------------------------
+     6) COUNTER ANIMATION (.stat-num[data-count])
+  -------------------------------------------------- */
+  function setupCounters() {
+    const nums = document.querySelectorAll('.stat-num[data-count]');
+    if (!nums.length || !('IntersectionObserver' in window)) {
+      // Fallback: render final number directly
+      nums.forEach(n => {
+        const target = parseInt(n.dataset.count, 10);
+        const suffix = n.dataset.suffix || '';
+        n.textContent = formatNum(target) + suffix;
+      });
+      return;
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !e.target.dataset.done) {
+          e.target.dataset.done = '1';
+          animateCounter(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .4 });
+    nums.forEach(n => io.observe(n));
+  }
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+    const ease = t => 1 - Math.pow(1 - t, 3); // ease-out cubic
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const v = Math.floor(target * ease(p));
+      el.textContent = formatNum(v) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = formatNum(target) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+  function formatNum(n) {
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  /* -------------------------------------------------
+     7) SCROLL REVEAL
+  -------------------------------------------------- */
+  function setupReveal() {
+    // Auto-tag common containers
+    const autoSelectors = [
+      '.prog-card', '.school-card', '.testi-card', '.feat-item',
+      '.why-card', '.cost-item', '.price-card', '.he-mini-card',
+      '.special-card', '.contact-block', '.school-list-item',
+      '.major-cat', '.he-detail-content', '.he-detail-side',
+      '.sec-head', '.section-head', '.guarantee-box', '.process-step',
+      '.school-tag', '.major-pill'
+    ];
+    document.querySelectorAll(autoSelectors.join(',')).forEach((el, i) => {
+      if (!el.classList.contains('reveal')) el.classList.add('reveal');
+      // stagger groups of cards in same row
+      const idx = i % 3;
+      if (idx === 1) el.classList.add('delay-1');
+      else if (idx === 2) el.classList.add('delay-2');
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  /* -------------------------------------------------
+     8) FAB VISIBILITY
+  -------------------------------------------------- */
+  function setupFAB() {
+    const fab = document.getElementById('fab-register') || document.querySelector('.fab');
+    if (!fab) return;
+    const onScroll = () => {
+      fab.classList.toggle('visible', window.scrollY > 400);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* -------------------------------------------------
+     9) SMOOTH SCROLL FOR # ANCHORS
+  -------------------------------------------------- */
+  function setupSmoothScroll() {
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const id = a.getAttribute('href');
+      if (id.length < 2) return;
+      const tgt = document.querySelector(id);
+      if (!tgt) return;
+      e.preventDefault();
+      const navH = (document.querySelector('header.nav')?.offsetHeight) || 0;
+      const y = tgt.getBoundingClientRect().top + window.pageYOffset - navH - 12;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  }
+
+  /* -------------------------------------------------
+     10) DECO PARALLAX (subtle)
+  -------------------------------------------------- */
+  function setupParallax() {
+    const decos = document.querySelectorAll('.hero .deco-circle, .page-hero .deco-circle');
+    if (!decos.length) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      decos.forEach((d, i) => {
+        const speed = (i % 2 === 0 ? .12 : .08);
+        d.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+    }, { passive: true });
+  }
+
+  /* -------------------------------------------------
+     11) PREFILL FORM FROM QUERY (?goi=vip, ?truong=)
+  -------------------------------------------------- */
+  function prefillForm() {
+    const params = new URLSearchParams(location.search);
+    const goi = params.get('goi');
+    const truong = params.get('truong');
+    const msg = document.getElementById('message');
+    if (msg && (goi || truong)) {
+      const lines = [];
+      if (goi)    lines.push('Quan tâm gói: ' + goi.toUpperCase());
+      if (truong) lines.push('Trường mong muốn: ' + truong);
+      msg.value = (lines.join('\n') + '\n\n' + (msg.value || '')).trim();
+    }
+  }
+
+  /* -------------------------------------------------
+     BOOT
+  -------------------------------------------------- */
+  function init() {
+    injectChrome();
+    setupMobileMenu();
+    setupNavScroll();
+    setupFAQ();
+    setupCounters();
+    setupReveal();
+    setupFAB();
+    setupSmoothScroll();
+    setupParallax();
+    prefillForm();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
