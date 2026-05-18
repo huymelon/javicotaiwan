@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>JAVICO — A4 Flyer v2 · 1240×1754</title>
+<link rel="stylesheet" href="_lib.css">
+<style>
+  body { background: #1a1a1a; padding: 30px 0; }
+  .stage { width: 1240px; height: 1754px; background: var(--cream); position: relative; overflow: hidden; margin: 0 auto; transform-origin: top center; }
+  @media (max-width: 1240px) { body { display: block; padding: 20px 0; } .stage { transform: scale(calc((100vw - 40px) / 1240)); } }
+
+  .bleed { position: absolute; inset: 18px; border: 1px dashed rgba(0,0,0,.06); pointer-events: none; z-index: 1; }
+
+  .c-coral { position: absolute; width: 760px; height: 760px; top: -220px; right: -220px; background: var(--coral); border-radius: 50%; z-index: 1; }
+  .c-mint  { position: absolute; width: 420px; height: 420px; bottom: 540px; left: -160px; background: var(--mint); border-radius: 50%; opacity: .9; z-index: 1; }
+  .c-y     { position: absolute; width: 100px; height: 100px; top: 720px; right: 260px; background: var(--yellow); border-radius: 50%; z-index: 1; }
+  .c-y2    { position: absolute; width: 70px; height: 70px; top: 250px; left: 100px; background: var(--yellow); border-radius: 50%; z-index: 1; }
+  .c-y-br  { position: absolute; bottom: -60px; right: 80px; width: 200px; height: 200px; background: var(--yellow); border-radius: 50%; z-index: 1; }
+
+  .halftone-tm { position: absolute; top: 60px; left: 380px; width: 280px; height: 130px; color: var(--coral); opacity: .55; background-image: radial-gradient(circle at center, currentColor 1.4px, transparent 1.7px); background-size: 14px 14px; -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); z-index: 1; }
+  .halftone-br { position: absolute; bottom: 280px; right: 320px; width: 280px; height: 130px; color: var(--coral); opacity: .5; background-image: radial-gradient(circle at center, currentColor 1.4px, transparent 1.7px); background-size: 14px 14px; -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 80%); mask-image: radial-gradient(ellipse at center, #000 40%, transparent 80%); z-index: 1; }
+
+  /* Big mint 臺 stamp (hero-only motif) */
+  .stamp-char {
+    position: absolute;
+    top: 320px; right: 80px;
+    font-family: 'Songti SC', 'Noto Serif TC', 'STSong', 'Times New Roman', serif;
+    font-weight: 900; color: var(--mint);
+    font-size: 580px; line-height: 1;
+    z-index: 2; opacity: .55;
+    user-select: none;
+  }
+  .stamp-overlay {
+    position: absolute; top: 320px; right: 80px;
+    width: 580px; height: 580px; z-index: 3;
+    background-image: radial-gradient(circle at center, var(--cream) 1.5px, transparent 2px);
+    background-size: 10px 10px; opacity: .55;
+    pointer-events: none;
+  }
+
+  .frame { position: absolute; inset: 80px; z-index: 5; display: flex; flex-direction: column; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .badge { background: var(--ink); color: #fff; padding: 12px 24px; font-weight: 700; letter-spacing: 3px; font-size: 14px; text-transform: uppercase; border-radius: 4px; }
+  .badge::before { content: '✱'; color: var(--coral); margin-right: 8px; }
+  .logo-r { display: flex; align-items: center; gap: 12px; background: #fff; padding: 10px 22px 10px 10px; border-radius: 10px; }
+  .logo-r .mark { width: 50px; height: 50px; background: var(--ink); border-radius: 10px; padding: 6px; flex-shrink: 0; }
+  .logo-r .mark img { width: 100%; height: 100%; object-fit: contain; }
+  .logo-r .wm { font-family: var(--fs); font-weight: 900; font-size: 19px; letter-spacing: .5px; line-height: 1; white-space: nowrap; }
+  .logo-r .wm small { display: block; font-weight: 600; font-size: 11px; color: var(--muted); letter-spacing: 1.5px; margin-top: 4px; white-space: nowrap; }
+
+  .eyebrow { font-family: var(--fs); font-weight: 700; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; color: var(--coral); margin-top: 60px; }
+
+  .hero { margin-top: 14px; position: relative; }
+  h1 {
+    font-family: var(--fcond);
+    font-style: italic; font-weight: 800;
+    text-transform: uppercase;
+    font-size: 180px; line-height: .88; letter-spacing: -4px;
+    color: var(--ink);
+  }
+  h1 .l-coral { color: var(--coral); display: inline-block; position: relative; }
+  h1 .l-coral .hand-wave { display: block; width: 100%; height: 24px; margin: -4px 0 0; }
+  h1 .l-final { display: block; }
+
+  .annot { position: absolute; top: -10px; left: 660px; font-family: var(--fhand); font-weight: 700; color: var(--ink); font-size: 46px; line-height: 1; transform: rotate(-5deg); z-index: 6; }
+  .annot .pre { font-size: 32px; font-style: italic; margin-right: 4px; }
+  .annot svg { position: absolute; inset: -10px -16px -16px -12px; width: calc(100% + 28px); height: calc(100% + 26px); pointer-events: none; }
+  .annot::before { content: ''; position: absolute; top: -16px; left: 14px; width: 12px; height: 18px; border-left: 4px solid var(--ink); border-radius: 4px; transform: rotate(20deg); }
+
+  .sub { font-family: var(--fs); font-size: 24px; font-weight: 500; color: var(--ink); margin-top: 36px; line-height: 1.5; max-width: 900px; }
+  .sub strong { color: var(--coral); font-weight: 800; }
+
+  .stickers { display: flex; gap: 16px; margin-top: 30px; }
+  .stk { display: inline-flex; align-items: center; gap: 12px; font-family: var(--fs); font-weight: 800; font-size: 18px; padding: 16px 32px; border-radius: 60px; text-transform: uppercase; letter-spacing: 1px; }
+  .stk-y { background: var(--yellow); color: var(--ink); transform: rotate(-3deg); }
+  .stk-m { background: var(--mint);   color: #fff;       transform: rotate(2deg); }
+  .stk-c { background: var(--coral);  color: #fff;       transform: rotate(-3deg); }
+  .stk .ico { width: 24px; height: 24px; background: rgba(0,0,0,.18); border-radius: 50%; display: grid; place-items: center; font-size: 14px; }
+  .stk-m .ico, .stk-c .ico { background: rgba(255,255,255,.25); }
+
+  /* Mid stat block */
+  .stats { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; margin-top: 50px; }
+  .stat-main { background: var(--ink); color: #fff; border-radius: 26px; padding: 38px 36px; }
+  .stat-main .lab { font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 700; }
+  .stat-main .num { font-family: var(--fcond); font-style: italic; font-weight: 900; font-size: 200px; line-height: 1; color: var(--yellow); margin-top: 4px; letter-spacing: -7px; }
+  .stat-main .num small { font-size: 80px; vertical-align: top; }
+  .stat-main .desc { font-family: var(--fs); font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.88); margin-top: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+  .stat-side { display: grid; grid-template-rows: 1fr 1fr; gap: 18px; }
+  .pill { background: #fff; border: 2px solid var(--ink); padding: 22px 24px; border-radius: 22px; }
+  .pill .big { font-family: var(--fcond); font-style: italic; font-weight: 900; font-size: 64px; line-height: 1; color: var(--coral); letter-spacing: -2px; }
+  .pill .big small { font-size: 26px; vertical-align: top; }
+  .pill .lab { font-family: var(--fs); font-size: 14px; color: var(--ink); margin-top: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; }
+
+  /* 6 hệ list */
+  .he-list { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .he-item { background: #fff; border-radius: 18px; padding: 22px 24px; border-top: 5px solid var(--coral); position: relative; }
+  .he-item:nth-child(2) { border-top-color: var(--mint); }
+  .he-item:nth-child(3) { border-top-color: var(--yellow); }
+  .he-item:nth-child(4) { border-top-color: var(--coral); }
+  .he-item:nth-child(5) { border-top-color: var(--mint); }
+  .he-item:nth-child(6) { border-top-color: var(--yellow); }
+  .he-item .num-pill { position: absolute; top: -14px; right: 18px; background: var(--ink); color: #fff; padding: 6px 14px; font-size: 11px; font-weight: 800; letter-spacing: 2px; border-radius: 20px; text-transform: uppercase; }
+  .he-item h3 { font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 32px; color: var(--ink); margin-top: 4px; line-height: 1; text-transform: uppercase; letter-spacing: -.5px; }
+  .he-item p { font-family: var(--fs); font-size: 13px; color: var(--ink); line-height: 1.55; margin-top: 8px; }
+
+  /* CTA bar */
+  .bottom-cta { margin-top: auto; background: var(--coral); color: #fff; padding: 32px 40px; border-radius: 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .bottom-cta .l h3 { font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 44px; line-height: 1; text-transform: uppercase; letter-spacing: -1px; }
+  .bottom-cta .l p { font-family: var(--fs); font-size: 15px; margin-top: 8px; opacity: .92; }
+  .bottom-cta .r { font-family: var(--fs); text-align: right; }
+  .bottom-cta .r .phone { font-family: var(--fcond); font-style: italic; font-weight: 900; font-size: 56px; line-height: 1; letter-spacing: -1px; }
+  .bottom-cta .r .url { font-size: 15px; margin-top: 8px; opacity: .92; font-weight: 600; }
+
+  .star { position: absolute; color: var(--ink); font-family: var(--fhand); font-weight: 700; z-index: 4; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="bleed"></div>
+  <div class="c-coral"></div>
+  <div class="c-mint"></div>
+  <div class="c-y"></div>
+  <div class="c-y2"></div>
+  <div class="c-y-br"></div>
+  <span class="stamp-char">臺</span>
+  <span class="stamp-overlay"></span>
+  <div class="halftone-tm"></div>
+  <div class="halftone-br"></div>
+
+  <span class="star" style="top: 280px; left: 80px; font-size: 30px; transform: rotate(15deg);">✦</span>
+  <span class="star" style="top: 540px; right: 100px; font-size: 28px; color: var(--coral); transform: rotate(-20deg);">✦</span>
+  <span class="star" style="top: 1340px; right: 380px; font-size: 26px;">↗</span>
+
+  <div class="frame">
+    <div class="top">
+      <span class="badge">JAVICO 2026</span>
+      <div class="logo-r">
+        <div class="mark"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="JAVICO"></div>
+        <div class="wm">JAVICO<small>DU HỌC ĐÀI LOAN</small></div>
+      </div>
+    </div>
+
+    <div class="eyebrow">14 năm · 2.000+ hồ sơ · 98% visa đậu lần đầu</div>
+
+    <div class="hero">
+      <h1>
+        Ê, ĐI<br>
+        <span class="l-coral">ĐÀI LOAN
+          <svg class="hand-wave" viewBox="0 0 700 24" preserveAspectRatio="none">
+            <path d="M 0 12 C 27 0 55 24 82 12 S 136 0 164 12 S 218 24 246 12 S 300 0 328 12 S 382 24 410 12 S 464 0 492 12 S 546 24 574 12 S 628 0 656 12 S 700 12 700 12"
+                  stroke="#FF6B6B" stroke-width="9" stroke-linecap="round" fill="none"/>
+          </svg>
+        </span>
+        <span class="l-final">THÔI!</span>
+      </h1>
+      <div class="annot">
+        <span class="pre">ở</span> ĐÀI BẮC
+        <svg viewBox="0 0 220 90" preserveAspectRatio="none">
+          <path d="M 110 7 C 55 10 12 28 14 50 C 16 74 70 86 120 84 C 170 82 208 66 206 44 C 204 24 160 7 110 7 Z" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="sub">Chi phí từ <strong>36 triệu</strong> · Học bổng tới <strong>100%</strong> · Làm thêm <strong>15–20 triệu/tháng</strong>. Không cần tiếng Hoa, hỗ trợ A–Z, tư vấn miễn phí 24h.</p>
+      <div class="stickers">
+        <span class="stk stk-y"><span class="ico">★</span>6 hệ đào tạo</span>
+        <span class="stk stk-m"><span class="ico">✓</span>Vừa học vừa làm</span>
+        <span class="stk stk-c"><span class="ico">↗</span>Cam kết hoàn tiền</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-main">
+        <div class="lab">★ Tỉ lệ visa đậu</div>
+        <div class="num">98<small>%</small></div>
+        <div class="desc">2.000+ hồ sơ thành công · 14 năm tư vấn an toàn từ 2015</div>
+      </div>
+      <div class="stat-side">
+        <div class="pill"><div class="big">36<small>tr</small></div><div class="lab">Chi phí khởi điểm</div></div>
+        <div class="pill"><div class="big">20+</div><div class="lab">Trường đối tác</div></div>
+      </div>
+    </div>
+
+    <div class="he-list">
+      <div class="he-item"><span class="num-pill">Hệ 1 · Hot</span><h3>Dự Bị 1+4</h3><p>Học bổng chính phủ tới 100%, không cần tiếng Hoa đầu vào.</p></div>
+      <div class="he-item"><span class="num-pill">Hệ 2 · ROI</span><h3>Vừa Học Vừa Làm</h3><p>Thu nhập 15–20 triệu/tháng, tiết kiệm 7–10 triệu sau chi phí.</p></div>
+      <div class="he-item"><span class="num-pill">Hệ 3</span><h3>Tự Túc</h3><p>200+ chuyên ngành. Không giới hạn tuổi. GPA 6.5/10+.</p></div>
+      <div class="he-item"><span class="num-pill">Hệ 4</span><h3>Liên Thông</h3><p>Cho người đã có bằng CĐ/ĐH, học tiếp 2–3 năm.</p></div>
+      <div class="he-item"><span class="num-pill">Hệ 5</span><h3>Thạc Sĩ</h3><p>Học bổng nội trường lên tới 60% + 9.000 TWD/tháng.</p></div>
+      <div class="he-item"><span class="num-pill">Hệ 6</span><h3>Ngôn Ngữ</h3><p>3 / 6 / 12 tháng. Nền tảng cho các hệ dài hạn.</p></div>
+    </div>
+
+    <div class="bottom-cta">
+      <div class="l">
+        <h3>Đăng ký tư vấn miễn phí — 24h</h3>
+        <p>Tư vấn cá nhân hoá · không ràng buộc · không phát sinh ngoài hợp đồng.</p>
+      </div>
+      <div class="r">
+        <div class="phone">0983 058 358</div>
+        <div class="url">javico.vn · Hà Nội · TP.HCM</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

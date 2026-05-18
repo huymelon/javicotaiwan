@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JAVICO — Brand Templates Gallery</title>
+<link rel="stylesheet" href="_lib.css">
+<style>
+  body { background: #f5f1ec; display: block; padding: 60px 32px; }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+
+  header {
+    margin-bottom: 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .ttl-block { display: flex; align-items: center; gap: 20px; }
+  .ttl-block .lg { width: 56px; height: 56px; background: var(--black); border-radius: 12px; padding: 8px; }
+  .ttl-block .lg img { width: 100%; height: 100%; object-fit: contain; }
+  .ttl-block h1 { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 36px; color: var(--ink); line-height: 1.1; }
+  .ttl-block h1 em { color: var(--coral); }
+  .ttl-block p { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .ver { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; padding: 6px 12px; border: 1px solid var(--muted); border-radius: 4px; }
+
+  .legend {
+    background: #fff; border-radius: 16px;
+    padding: 24px 28px; margin-bottom: 36px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px;
+    border-left: 6px solid var(--coral);
+  }
+  .legend-item { font-size: 13px; line-height: 1.5; }
+  .legend-item .k { font-weight: 800; color: var(--ink); display: block; font-size: 14px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: #fff; border-radius: 18px;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+    border: 1px solid #e5e0d8;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -16px rgba(0,0,0,.18);
+  }
+  .card .preview {
+    aspect-ratio: 16 / 9;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card .preview.tall { aspect-ratio: 9 / 16; }
+  .card .preview.square { aspect-ratio: 1 / 1; }
+  .card .preview.print { aspect-ratio: 1 / 1.41; }
+
+  /* Mini preview content (representative) */
+  .mini { font-family: var(--fd); font-style: italic; font-weight: 800; color: var(--ink); text-align: center; padding: 20px; position: relative; }
+  .mini .c { color: var(--coral); display: block; }
+  .mini .dc-coral { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: var(--coral); top: -20px; right: -10px; }
+  .mini .dc-mint  { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: var(--mint); bottom: -15px; left: -8px; opacity: .85; }
+  .mini .dc-y     { position: absolute; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); top: 30%; right: 25%; }
+  .mini .ttl { font-size: clamp(20px, 5vw, 32px); line-height: 1; position: relative; z-index: 2; }
+
+  .card .meta { padding: 20px 22px; }
+  .card .name { font-weight: 800; font-size: 16px; margin-bottom: 4px; }
+  .card .dim { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .card .desc { font-size: 13px; color: var(--muted); line-height: 1.55; margin-top: 8px; }
+  .card .open-btn {
+    display: inline-block; margin-top: 14px;
+    background: var(--ink); color: #fff;
+    padding: 8px 16px; border-radius: 6px;
+    font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 32px; border-top: 1px solid #e5e0d8;
+    text-align: center; font-size: 13px; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="ttl-block">
+      <div class="lg"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="JAVICO"></div>
+      <div>
+        <h1>JAVICO <em>Templates Gallery</em></h1>
+        <p>Editorial brand assets · 7 ready-to-use templates · 05/2026</p>
+      </div>
+    </div>
+    <span class="ver">v1.0 · 2026.05</span>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><span class="k">Design DNA</span>Cream + Coral + Mint + Yellow · Display italic + Hand-drawn</div>
+    <div class="legend-item"><span class="k">Use case</span>Social media · Print · Brand reference</div>
+    <div class="legend-item"><span class="k">Tech stack</span>HTML + CSS + Inline SVG (zero dependency)</div>
+    <div class="legend-item"><span class="k">Sharing</span>_lib.css để chia sẻ tokens · Mỗi template standalone</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- Key Visual -->
+    <a class="card" href="key-visual.html" target="_blank">
+      <div class="preview" style="background:var(--cream);">
+        <div class="mini" style="width:100%;">
+          <div class="dc-coral"></div>
+          <div class="dc-mint"></div>
+          <div class="dc-y"></div>
+          <div class="ttl">Ê, ĐI <span class="c">ĐÀI LOAN</span><br>THÔI!</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">★ Key Visual · Hero</div>
+        <div class="dim">1920 × 1080 · 16:9</div>
+        <p class="desc">Editorial hero cho web · YouTube cover · slide đầu deck.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+    <!-- Print A4 Flyer -->
+    <a class="card" href="print-a4-flyer.html" target="_blank">
+      <div class="preview print" style="background:var(--cream);">
+        <div class="mini" style="width:100%;">
+          <div class="dc-coral" style="width:50px;height:50px;"></div>
+          <div class="dc-mint"  style="width:40px;height:40px;"></div>
+          <div class="ttl" style="font-size:22px;">Ê, ĐI <span class="c">ĐÀI LOAN</span> THÔI!</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">📄 A4 Print Flyer</div>
+        <div class="dim">1240 × 1754 · A4 portrait · 150 DPI</div>
+        <p class="desc">In tờ rơi A4 · phát học sinh tại trường · treo văn phòng.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+    <!-- FB Cover -->
+    <a class="card" href="social-fb-cover.html" target="_blank">
+      <div class="preview" style="background:var(--cream); aspect-ratio: 1640 / 924;">
+        <div class="mini" style="width:100%;">
+          <div class="dc-coral"></div>
+          <div class="dc-mint" style="left:auto;right:-8px;"></div>
+          <div class="ttl">Ê, ĐI <span class="c">ĐÀI LOAN</span> THÔI!</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">📘 Facebook Cover</div>
+        <div class="dim">1640 × 924 · FB Page</div>
+        <p class="desc">Bìa Fanpage · Banner Facebook Event.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+    <!-- IG Story -->
+    <a class="card" href="social-ig-story.html" target="_blank">
+      <div class="preview tall" style="background:var(--cream);">
+        <div class="mini">
+          <div class="dc-coral"></div>
+          <div class="dc-mint"></div>
+          <div class="ttl">Ê, ĐI<br><span class="c">ĐÀI LOAN</span><br>THÔI!</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">📱 IG Story / TikTok Cover</div>
+        <div class="dim">1080 × 1920 · 9:16</div>
+        <p class="desc">Story Instagram · TikTok thumbnail · Zalo Story.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+    <!-- Quote Card -->
+    <a class="card" href="social-quote-card.html" target="_blank">
+      <div class="preview square" style="background:var(--cream);">
+        <div class="mini">
+          <div class="dc-coral"></div>
+          <div class="ttl" style="font-size:22px;">"Đi <span class="c">Đài Loan</span><br>đổi đời con tôi."</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">💬 Quote Card</div>
+        <div class="dim">1080 × 1080 · 1:1</div>
+        <p class="desc">Testimonial cựu DHS · review phụ huynh.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+    <!-- Stat Card -->
+    <a class="card" href="social-stat-card.html" target="_blank">
+      <div class="preview square" style="background:var(--cream);">
+        <div class="mini">
+          <div class="dc-y"></div>
+          <div class="ttl" style="font-size:60px; color:var(--coral);">98<span style="font-size:32px;">%</span></div>
+          <div style="font-size:12px; color:var(--muted); letter-spacing:2px;">VISA ĐẬU</div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">📊 Stat Card</div>
+        <div class="dim">1080 × 1080 · 1:1</div>
+        <p class="desc">Số liệu nổi bật · 98% visa · 36tr chi phí · 20+ trường.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+    <!-- Brand Guideline -->
+    <a class="card" href="brand-guideline.html" target="_blank">
+      <div class="preview" style="background:var(--cream); aspect-ratio: 3 / 4;">
+        <div class="mini" style="width:100%;">
+          <div class="dc-coral" style="width:120px;height:120px;"></div>
+          <div class="dc-mint"></div>
+          <div class="ttl" style="font-size:28px;">BRAND<br><span class="c">GUIDELINE</span></div>
+        </div>
+      </div>
+      <div class="meta">
+        <div class="name">📚 Brand Guideline (full)</div>
+        <div class="dim">1100w · Multi-page</div>
+        <p class="desc">Brand book đầy đủ — colors, type, logo, motifs, voice, applications, grid system.</p>
+        <span class="open-btn">Mở →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    Mỗi template là 1 file HTML standalone. Mở trong browser để xem at-scale; export PDF/PNG bằng "Print → Save as PDF" hoặc screenshot tools.
+    <br>
+    <strong>JAVICO</strong> · Du học Đài Loan từ 2015 · javico.vn · 0983 058 358
+  </footer>
+
+</div>
+</body>
+</html>

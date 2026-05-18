@@ -15,75 +15,129 @@
 <header id="site-nav" class="nav"></header>
 
 <!-- ============================================================
-     HERO
+     HERO — Editorial v3.0 (05/2026)  ·  2-column layout w/ real PNG assets
 ============================================================ -->
-<section class="hero" style="position:relative;overflow:hidden;">
+<section class="hero hero-editorial" style="position:relative;overflow:hidden;">
   <!-- Background Taipei city at low opacity -->
-  <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1470093851219-69951fcbb533?auto=format&fit=crop&w=1600&q=50') center/cover no-repeat;opacity:0.07;z-index:0;"></div>
-  <div class="deco-circle deco-coral" aria-hidden="true"></div>
-  <div class="deco-circle deco-mint"  aria-hidden="true"></div>
+  <div class="hero-bg-img" aria-hidden="true"></div>
+
+  <!-- Sparse global deco -->
   <div class="deco-circle deco-yellow-sm" aria-hidden="true"></div>
   <div class="deco-circle deco-coral-sm" aria-hidden="true"></div>
-  <div class="deco-circle deco-yellow-br" aria-hidden="true"></div>
+  <span class="hero-scribble s-1" aria-hidden="true">✦</span>
+  <span class="hero-scribble s-3" aria-hidden="true">↗</span>
 
-  <div class="hero-inner">
-    <div class="badge-top">★ JAVICO DU HỌC ĐÀI LOAN 2026</div>
+  <div class="hero-grid">
 
-    <h1 class="hero-title">
-      Ê, đi<br>
-      <em>Đài Loan</em>
-      <svg class="wavy-line" viewBox="0 0 480 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M0 11 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0 q12-11 24 0 q12 11 24 0" stroke="#4ECDC4" stroke-width="7" stroke-linecap="round"/>
-      </svg>
-      thôi!
-    </h1>
+    <!-- ===== LEFT: editorial text ===== -->
+    <div class="hero-text">
+      <div class="badge-top">★ JAVICO DU HỌC ĐÀI LOAN 2026</div>
 
-    <p class="hero-sub">
-      Chi phí từ <strong>36 triệu</strong> · Học bổng tới <strong>100%</strong> · Làm thêm <strong>15–20 triệu/tháng</strong><br>
-      Không cần tiếng Hoa · Hỗ trợ A–Z · Tư vấn miễn phí
-    </p>
+      <h1 class="hero-title editorial" style="position:relative;">
+        Ê, đi<br>
+        <em>Đài Loan</em>
+        <svg class="wavy-line wavy-line-smooth" viewBox="0 0 480 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M 0 11 C 20 0 40 22 60 11 S 100 0 120 11 S 160 22 180 11 S 220 0 240 11 S 280 22 300 11 S 340 0 360 11 S 400 22 420 11 S 460 0 480 11" stroke="#4ECDC4" stroke-width="7" stroke-linecap="round"/>
+        </svg>
+        thôi!
 
-    <div class="stickers hero-stickers">
-      <span class="sticker sticker-yellow">🎓 6 hệ đào tạo</span>
-      <span class="sticker sticker-mint">💰 Vừa học vừa làm</span>
-      <span class="sticker sticker-coral">🛡️ Cam kết hoàn tiền</span>
-    </div>
+        <!-- Hand-drawn annotation "ở ĐÀI BẮC" -->
+        <span class="hero-annot" style="top:-12px;right:-6%;">
+          <span class="pre">ở</span> ĐÀI BẮC
+          <svg viewBox="0 0 220 90" preserveAspectRatio="none">
+            <path d="M 110 7 C 55 10 12 28 14 50 C 16 74 70 86 120 84 C 170 82 208 66 206 44 C 204 24 160 7 110 7 Z" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </h1>
 
-    <div class="hero-actions">
-      <a href="dang-ky.html" class="btn btn-primary btn-lg">Đăng ký tư vấn miễn phí</a>
-      <a href="cac-he.html" class="btn btn-outline-dark btn-lg">Xem 6 hệ đào tạo →</a>
-    </div>
+      <p class="hero-sub">
+        Chi phí từ <strong>36 triệu</strong> · Học bổng tới <strong>100%</strong> · Làm thêm <strong>15–20 triệu/tháng</strong><br>
+        Không cần tiếng Hoa · Hỗ trợ A–Z · Tư vấn miễn phí
+      </p>
 
-    <div class="hero-cards" style="display:grid;grid-template-columns:repeat(4,1fr);flex-wrap:nowrap;">
-      <div class="hero-card">
-        <span class="hc-icon">🏆</span>
-        <div>
-          <strong>10 năm kinh nghiệm</strong>
-          <span>Tư vấn từ 2015</span>
-        </div>
+      <div class="stickers hero-stickers">
+        <span class="sticker sticker-yellow">🎓 6 hệ đào tạo</span>
+        <span class="sticker sticker-mint">💰 Vừa học vừa làm</span>
+        <span class="sticker sticker-coral">🛡️ Cam kết hoàn tiền</span>
       </div>
-      <div class="hero-card">
-        <span class="hc-icon">✅</span>
-        <div>
-          <strong>98% visa đậu</strong>
-          <span>2,000+ hồ sơ</span>
-        </div>
-      </div>
-      <div class="hero-card">
-        <span class="hc-icon">🌏</span>
-        <div>
-          <strong>20+ trường đối tác</strong>
-          <span>Hợp tác chính thức</span>
-        </div>
-      </div>
-      <div class="hero-card">
-        <span class="hc-icon">📞</span>
-        <div>
-          <strong>Hỗ trợ 24/7</strong>
-          <span>Tại Đài Loan</span>
-        </div>
+
+      <div class="hero-actions">
+        <a href="dang-ky.html" class="btn btn-primary btn-lg">Đăng ký tư vấn miễn phí</a>
+        <a href="cac-he.html" class="btn btn-outline-dark btn-lg">Xem 6 hệ đào tạo →</a>
       </div>
     </div>
+
+    <!-- ===== RIGHT: editorial visual composition ===== -->
+    <div class="hero-visual" aria-hidden="true">
+      <!-- 臺 CJK stamp character backdrop -->
+      <span class="hv-stamp-char">臺</span>
+      <!-- Sun disk (coral) -->
+      <span class="hv-sun"></span>
+      <!-- Halftone dot pattern overlay -->
+      <span class="hv-halftone"></span>
+      <!-- Mint scribble doodle -->
+      <img class="hv-doodle hv-wavy" src="img/brand/doodle-wavyline-mint.png" alt="">
+      <!-- Asterisk doodle (coral) -->
+      <img class="hv-doodle hv-aster" src="img/brand/doodle-asterisk.png" alt="">
+      <!-- Squiggle doodle -->
+      <img class="hv-doodle hv-squiggle" src="img/brand/doodle-squiggle.png" alt="">
+      <!-- Curl doodle -->
+      <img class="hv-doodle hv-curl" src="img/brand/doodle-curl.png" alt="">
+      <!-- Dots cluster -->
+      <img class="hv-doodle hv-dots" src="img/brand/doodle-dots.png" alt="">
+      <!-- Chiang Kai-shek Memorial silhouette -->
+      <img class="hv-cks" src="img/brand/landmark-chiangkaishek.png" alt="">
+      <!-- Taipei 101 silhouette -->
+      <img class="hv-taipei101" src="img/brand/landmark-taipei101.png" alt="">
+      <!-- Birds / swallows (Unicode) -->
+      <span class="hv-bird b1">↝</span>
+      <span class="hv-bird b2">↝</span>
+      <span class="hv-bird b3">↝</span>
+      <!-- Yellow circle stamp -->
+      <div class="hero-circle-stamp hv-stamp">
+        ONE TRIP
+        <strong>ĐỔI ĐỜI</strong>
+        ENDLESS POSSIBILITIES
+      </div>
+      <!-- Visa approved stamp -->
+      <img class="hv-visa-stamp" src="img/brand/stamp-visa-approved.png" alt="">
+    </div>
+
+  </div>
+
+  <!-- ===== Full-width black stat panel ===== -->
+  <div class="hero-statbar">
+    <div class="hero-statbar-inner">
+      <div class="hs-card">
+        <strong>10</strong>
+        <span>Năm kinh nghiệm<br>tư vấn du học</span>
+      </div>
+      <div class="hs-card hs-card-accent">
+        <strong>2,000<em>+</em></strong>
+        <span>Hồ sơ du học<br>thành công</span>
+      </div>
+      <div class="hs-card">
+        <strong>98<em>%</em></strong>
+        <span>Tỷ lệ visa<br>đậu lần đầu</span>
+      </div>
+      <div class="hs-card">
+        <strong>20<em>+</em></strong>
+        <span>Trường đối tác<br>chính thức</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Coral CTA banner ===== -->
+  <a href="dang-ky.html" class="hero-cta-banner">
+    <span class="hcb-text">Đăng ký nhận tư vấn miễn phí — JAVICO trả lời trong 24h</span>
+    <span class="hcb-arrow" aria-hidden="true">→</span>
+  </a>
+
+  <!-- ===== Footer metadata ===== -->
+  <div class="hero-footmeta">
+    <span>📅 Tuyển sinh kỳ 9/2026 · 3/2027</span>
+    <span>📍 VP Hà Nội · TP.HCM · Đài Bắc</span>
+    <span>🌐 javico.vn · 0983 058 358</span>
   </div>
 </section>
 

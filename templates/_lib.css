@@ -1,0 +1,59 @@
+/* =====================================================
+   JAVICO — Editorial Templates Library
+   Shared design tokens + fonts for /templates/ assets
+   v1.0 — 05/2026
+   ===================================================== */
+
+/* ===== Fonts (Google Fonts CDN) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Caveat:wght@700&family=Playfair+Display:ital,wght@1,800;1,900&family=Noto+Serif+TC:wght@700;900&display=swap');
+
+/* ===== Tokens ===== */
+:root {
+  /* Brand colors */
+  --cream:    #FFF0E6;
+  --coral:    #FF6B6B;
+  --coral-2:  #E85555;
+  --mint:     #4ECDC4;
+  --mint-2:   #3AB5AB;
+  --yellow:   #FFD93D;
+  --yellow-2: #E8B900;
+  --black:    #1A1A1A;
+  --ink:      #1A1A1A;
+  --muted:    #6B7280;
+
+  /* Typography */
+  --fs:     'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  --fd:     'Playfair Display', Georgia, serif;        /* Display italic (VN-friendly fallback) */
+  --fcond:  'Bebas Neue', 'Be Vietnam Pro', sans-serif; /* Condensed display */
+  --fhand:  'Caveat', cursive;                          /* Handwritten */
+  --fcjk:   'Noto Serif TC', 'Songti SC', 'STSong', serif; /* Chinese stamp char */
+}
+
+/* ===== Base reset ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--fs);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex; align-items: flex-start; justify-content: center;
+  min-height: 100vh;
+}
+img, svg { max-width: 100%; display: block; }
+
+/* ===== Top-left JAVICO badge (shared motif) ===== */
+.jvc-badge-tl {
+  background: var(--black); color: #fff;
+  padding: 10px 22px;
+  font-weight: 700; letter-spacing: 3px; font-size: 13px;
+  text-transform: uppercase; border-radius: 4px;
+  font-family: var(--fs);
+  display: inline-block;
+}
+.jvc-badge-tl::before { content: '✱'; color: var(--coral); margin-right: 8px; }
+
+/* ===== Print helpers ===== */
+@media print {
+  body { background: white; display: block; }
+  .stage { box-shadow: none; margin: 0; }
+}

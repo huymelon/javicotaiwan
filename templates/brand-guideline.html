@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>JAVICO — Brand Guidelines</title>
+<link rel="stylesheet" href="_lib.css">
+<style>
+  body { background: #f5f1ec; font-family: var(--fs); color: var(--ink); -webkit-font-smoothing: antialiased; padding: 40px 20px; line-height: 1.6; }
+  .page {
+    width: 1100px; max-width: 100%;
+    margin: 0 auto 40px;
+    background: var(--cream);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    min-height: 1556px;
+  }
+  .page-pad { padding: 90px 100px; position: relative; z-index: 2; }
+  .page-num { position: absolute; bottom: 36px; right: 60px; font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); letter-spacing: 2px; }
+  .page-foot { position: absolute; bottom: 36px; left: 60px; font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+
+  /* Eyebrow */
+  .eye { font-weight: 700; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: var(--coral); margin-bottom: 14px; }
+  /* Display title */
+  h1.cover {
+    font-family: var(--fcond); font-style: italic; font-weight: 800;
+    font-size: 200px; line-height: .9; letter-spacing: -6px;
+    color: var(--ink); margin: 0; text-transform: uppercase;
+  }
+  h1.cover em { color: var(--coral); font-style: italic; }
+  h2.sec {
+    font-family: var(--fd); font-style: italic; font-weight: 800;
+    font-size: 48px; line-height: 1.1; letter-spacing: -1.5px;
+    color: var(--ink); margin: 0 0 16px;
+  }
+  h2.sec em { color: var(--coral); font-style: italic; }
+  h3 { font-family: var(--fs); font-weight: 700; font-size: 18px; margin: 0 0 8px; }
+  p { font-family: var(--fs); font-size: 15px; line-height: 1.65; color: var(--ink); }
+  .lead { font-size: 18px; line-height: 1.55; color: var(--ink); max-width: 720px; }
+  .muted { color: var(--muted); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .tk { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+
+  /* Cover deco */
+  .cv-deco-coral { width: 660px; height: 660px; top: -200px; right: -180px; background: var(--coral); }
+  .cv-deco-mint  { width: 320px; height: 320px; bottom: -120px; left: -80px; background: var(--mint); }
+  .cv-deco-y     { width: 80px; height: 80px; top: 280px; right: 280px; background: var(--yellow); }
+  /* Halftone patch on cover */
+  .cv-halftone { position: absolute; top: 90px; left: 380px; width: 240px; height: 120px; color: var(--coral); opacity: .5; background-image: radial-gradient(circle at center, currentColor 1.3px, transparent 1.6px); background-size: 12px 12px; -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); z-index: 1; }
+  /* Cover stamp char */
+  .cv-stamp { position: absolute; top: 150px; right: 60px; font-family: 'Songti SC', 'Noto Serif TC', serif; font-weight: 900; color: var(--mint); font-size: 480px; line-height: 1; z-index: 1; opacity: .5; user-select: none; }
+  .cv-stamp-overlay { position: absolute; top: 150px; right: 60px; width: 480px; height: 480px; z-index: 2; background-image: radial-gradient(circle at center, var(--cream) 1.4px, transparent 1.8px); background-size: 10px 10px; opacity: .5; pointer-events: none; }
+
+  .badge-tl {
+    background: var(--black); color: #fff;
+    padding: 10px 22px;
+    font-weight: 700; letter-spacing: 3px; font-size: 13px;
+    text-transform: uppercase; border-radius: 4px;
+    display: inline-block;
+  }
+  .badge-tl::before { content: '✱'; color: var(--coral); margin-right: 8px; }
+  .vsn { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); letter-spacing: 2px; }
+
+  /* Cover grid */
+  .cover-grid { display: grid; grid-template-rows: auto 1fr auto; height: 1376px; }
+  .cv-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .cv-logo { display: flex; align-items: center; gap: 14px; }
+  .cv-logo img { width: 60px; height: 60px; background: #000; border-radius: 12px; padding: 6px; display: block; }
+  .cv-logo .wm { font-weight: 800; letter-spacing: 1.5px; line-height: 1.1; font-size: 18px; }
+  .cv-logo .wm small { display: block; font-weight: 500; color: var(--muted); font-size: 11px; letter-spacing: 1.5px; margin-top: 3px; }
+
+  /* TOC */
+  .toc { columns: 2; column-gap: 60px; max-width: 800px; }
+  .toc-item { break-inside: avoid; padding: 14px 0; border-bottom: 1px dashed #e5e0d8; display: flex; justify-content: space-between; align-items: baseline; }
+  .toc-item:last-child { border-bottom: 0; }
+  .toc-item .n { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 22px; color: var(--coral); margin-right: 16px; min-width: 30px; }
+  .toc-item .t { font-weight: 600; font-size: 16px; flex: 1; }
+  .toc-item .pg { font-family: ui-monospace, monospace; font-size: 13px; color: var(--muted); }
+
+  /* Color cards */
+  .color-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 12px; margin-top: 30px; }
+  .cc { border-radius: 18px; overflow: hidden; }
+  .cc .swatch { height: 200px; display: flex; align-items: flex-end; padding: 16px; }
+  .cc .swatch .pct { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 56px; line-height: 1; }
+  .cc .meta { background: #fff; padding: 16px; }
+  .cc .meta .nm { font-weight: 800; font-size: 16px; margin-bottom: 4px; }
+  .cc .meta .hex, .cc .meta .rgb, .cc .meta .cmyk { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); display: block; line-height: 1.6; }
+  .cc.lt .swatch .pct { color: var(--ink); }
+  .cc:not(.lt) .swatch .pct { color: #fff; }
+
+  /* Type specimen */
+  .typ-row { padding: 24px 0; border-bottom: 1px solid #e5e0d8; }
+  .typ-row:last-child { border-bottom: 0; }
+  .typ-name { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+  .typ-spec { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .typ-display { font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 110px; line-height: .9; letter-spacing: -3px; color: var(--ink); margin: 10px 0; text-transform: uppercase; }
+  .typ-display em { color: var(--coral); }
+  .typ-display-vi { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 80px; line-height: 1; letter-spacing: -2px; color: var(--ink); margin: 10px 0; }
+  .typ-display-vi em { color: var(--coral); font-style: italic; }
+  .typ-h2-sample { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 36px; line-height: 1.2; color: var(--ink); margin: 8px 0; }
+  .typ-body-sample { font-family: var(--fs); font-size: 16px; line-height: 1.65; max-width: 720px; }
+  .typ-utm { font-family: 'UTM Atlas Solid', Georgia, serif; font-weight: 700; font-size: 64px; letter-spacing: 3px; color: var(--ink); margin: 10px 0; }
+  .typ-utm-deco { font-family: 'UTM Atlas', Georgia, serif; font-weight: 700; font-size: 64px; letter-spacing: 3px; color: var(--coral); margin: 10px 0; }
+
+  /* DNA / motif */
+  .motifs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .motif-card {
+    background: #fff; border-radius: 20px; padding: 28px;
+    border: 2px solid var(--ink);
+  }
+  .motif-card .mn { font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; }
+  .motif-card h3 { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 28px; color: var(--ink); margin-bottom: 16px; line-height: 1.1; }
+  .motif-card .demo { background: var(--cream); border-radius: 12px; padding: 28px; min-height: 140px; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; position: relative; overflow: hidden; }
+  .motif-card .note { margin-top: 14px; font-size: 13px; color: var(--ink); line-height: 1.6; }
+  .motif-card .note code { background: var(--cream); padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+
+  .demo-sticker { padding: 10px 22px; font-size: 13px; font-weight: 700; border-radius: 40px; font-family: var(--fs); }
+  .ds-y { background: var(--yellow); color: var(--ink); transform: rotate(-3deg); }
+  .ds-m { background: var(--mint); color: #fff; transform: rotate(2deg); }
+  .ds-c { background: var(--coral); color: #fff; transform: rotate(-3deg); }
+
+  .demo-title { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 40px; line-height: 1; letter-spacing: -2px; color: var(--ink); text-align: center; }
+  .demo-title .l2 { color: var(--coral); display: block; }
+  .demo-title svg { display: block; margin: -4px auto 0; }
+
+  .demo-circles { position: relative; width: 100%; height: 140px; }
+  .demo-circles .dc { position: absolute; border-radius: 50%; }
+  .demo-circles .dc-coral { width: 100px; height: 100px; top: -10px; right: 10%; background: var(--coral); }
+  .demo-circles .dc-mint { width: 70px; height: 70px; bottom: -10px; left: 10%; background: var(--mint); }
+  .demo-circles .dc-y { width: 32px; height: 32px; top: 20%; left: 38%; background: var(--yellow); }
+  .demo-circles .marker { position: absolute; top: 16px; right: 4%; font-family: ui-monospace, monospace; font-size: 9px; color: var(--ink); background: #fff; padding: 2px 6px; border-radius: 4px; }
+
+  .demo-badge { background: var(--black); color: #fff; padding: 8px 16px; font-weight: 700; letter-spacing: 2.5px; font-size: 12px; text-transform: uppercase; border-radius: 4px; }
+
+  /* Rules / dos & donts */
+  .dosgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .rcard { background: #fff; border-radius: 16px; padding: 22px 24px; border-left: 6px solid var(--mint); }
+  .rcard.bad { border-left-color: var(--coral); }
+  .rcard h4 { font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; color: var(--mint-2); }
+  .rcard.bad h4 { color: var(--coral); }
+  .rcard ul { list-style: none; }
+  .rcard ul li { font-size: 14px; padding: 6px 0 6px 22px; position: relative; line-height: 1.5; }
+  .rcard ul li::before { content: '✓'; position: absolute; left: 0; color: var(--mint-2); font-weight: 800; }
+  .rcard.bad ul li::before { content: '✕'; color: var(--coral); }
+
+  /* Logo plate */
+  .logo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-top: 24px; }
+  .lg-card { background: #fff; border-radius: 18px; padding: 36px; text-align: center; }
+  .lg-card.dark { background: var(--ink); }
+  .lg-card.coral { background: var(--coral); }
+  .lg-card .label { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; margin-top: 20px; text-transform: uppercase; }
+  .lg-card.dark .label, .lg-card.coral .label { color: rgba(255,255,255,.6); }
+  .lg-mark { width: 120px; height: 120px; margin: 0 auto; border-radius: 24px; display: grid; place-items: center; }
+  .lg-mark img { width: 100%; height: 100%; object-fit: contain; }
+  .lg-mark.k { background: var(--ink); padding: 14px; }
+  .lg-mark.w { background: #fff; padding: 14px; }
+
+  /* clearspace */
+  .cs-wrap { background: #fff; border-radius: 18px; padding: 36px; margin-top: 16px; display: flex; align-items: center; justify-content: center; }
+  .cs-box { position: relative; padding: 60px; border: 1px dashed var(--coral); }
+  .cs-box::before { content: 'X'; position: absolute; top: -10px; left: -10px; background: var(--cream); padding: 0 6px; color: var(--coral); font-weight: 700; font-family: ui-monospace, monospace; font-size: 12px; }
+  .cs-inner { width: 80px; height: 80px; background: var(--ink); border-radius: 14px; padding: 10px; }
+  .cs-inner img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* sticker pack */
+  .pack { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; background: #fff; padding: 36px; border-radius: 18px; min-height: 200px; align-items: center; justify-content: center; }
+  .stk { padding: 12px 24px; border-radius: 50px; font-weight: 800; font-size: 14px; font-family: var(--fs); display: inline-flex; align-items: center; text-transform: uppercase; letter-spacing: 1px; }
+  .stk.y { background: var(--yellow); color: var(--ink); transform: rotate(-3deg); }
+  .stk.m { background: var(--mint); color: #fff; transform: rotate(2deg); }
+  .stk.c { background: var(--coral); color: #fff; transform: rotate(-3deg); }
+
+  /* voice / DO */
+  .vox { background: #fff; border-radius: 18px; padding: 28px 32px; margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; align-items: start; }
+  .vx-good, .vx-bad { padding: 12px 0; border-bottom: 1px solid #f0eae0; }
+  .vx-good:last-child, .vx-bad:last-child { border-bottom: 0; }
+  .vx-good .lab { font-size: 11px; font-weight: 800; color: var(--mint-2); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .vx-bad .lab  { font-size: 11px; font-weight: 800; color: var(--coral);  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .vx-good .txt, .vx-bad .txt { font-size: 14px; line-height: 1.5; }
+
+  /* Application gallery row */
+  .apps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 20px; }
+  .app { background: #fff; border-radius: 16px; padding: 14px; aspect-ratio: 1 / 1.3; display: flex; flex-direction: column; }
+  .app .ph { flex: 1; background: var(--cream); border-radius: 12px; padding: 14px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+  .app .ph .b { background: var(--ink); color: #fff; font-size: 8px; padding: 3px 8px; letter-spacing: 1px; font-weight: 700; align-self: flex-start; border-radius: 2px; position: absolute; top: 10px; left: 10px; }
+  .app .ph .t { font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 26px; line-height: 1; color: var(--ink); }
+  .app .ph .t .c { color: var(--coral); display: block; }
+  .app .ph .dc { position: absolute; border-radius: 50%; background: var(--coral); width: 80px; height: 80px; top: -20px; right: -20px; }
+  .app .ph .dm { position: absolute; border-radius: 50%; background: var(--mint); width: 60px; height: 60px; bottom: -20px; left: -20px; }
+  .app .lab { font-size: 11px; color: var(--muted); margin-top: 8px; font-family: ui-monospace, monospace; letter-spacing: 1px; text-align: center; }
+
+  /* Grid system */
+  .grid-demo { background: #fff; border-radius: 16px; padding: 30px; margin-top: 16px; }
+  .gd-cols { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; height: 200px; }
+  .gd-cols .col { background: rgba(255,107,107,.12); border-radius: 4px; position: relative; }
+  .gd-note { font-family: ui-monospace, monospace; font-size: 11px; color: var(--muted); margin-top: 12px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · COVER ============ -->
+<div class="page">
+  <div class="jvc-deco cv-deco-coral"></div>
+  <div class="jvc-deco cv-deco-mint"></div>
+  <div class="jvc-deco cv-deco-y"></div>
+  <div class="cv-halftone"></div>
+  <span class="cv-stamp">臺</span>
+  <span class="cv-stamp-overlay"></span>
+
+  <div class="page-pad cover-grid">
+    <div>
+      <span class="badge-tl">JAVICO 2026</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; justify-content: center; position: relative;">
+      <div class="eye">Brand Guidelines · v1.0</div>
+      <h1 class="cover">
+        Ê, ĐI<br>
+        <em>ĐÀI LOAN</em><br>
+        THÔI.
+      </h1>
+      <svg style="display: block; height: 26px; width: 720px; margin: -6px 0 0 6px;" viewBox="0 0 720 26" preserveAspectRatio="none">
+        <path d="M 0 13 C 27 0 55 26 82 13 S 136 0 164 13 S 218 26 246 13 S 300 0 328 13 S 382 26 410 13 S 464 0 492 13 S 546 26 574 13 S 628 0 656 13 S 700 13 720 13" stroke="#FF6B6B" stroke-width="9" stroke-linecap="round" fill="none"/>
+      </svg>
+      <p class="lead" style="margin-top: 36px;">Bộ chuẩn nhận diện thương hiệu cho mảng Du học Đài Loan. Tài liệu này khoá brand standards cho mọi nhân viên, freelancer và agency.</p>
+      <div style="position: absolute; top: -20px; right: 60px; font-family: var(--fhand); font-weight: 700; color: var(--ink); font-size: 36px; line-height: 1; transform: rotate(-6deg); padding: 4px 14px;">
+        v2.0
+        <svg viewBox="0 0 100 50" preserveAspectRatio="none" style="position: absolute; inset: -8px -14px; width: calc(100% + 28px); height: calc(100% + 16px); pointer-events: none;">
+          <path d="M 50 4 C 18 6 4 18 6 26 C 8 38 35 46 56 44 C 80 42 96 32 94 22 C 92 12 75 4 50 4 Z" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cv-bottom">
+      <div class="cv-logo">
+        <img src="../img/Logo%20JVC%20unlock%20BG.png" alt="JAVICO">
+        <div class="wm">JAVICO<small>DU HỌC ĐÀI LOAN</small></div>
+      </div>
+      <div style="text-align: right;">
+        <div class="vsn">VERSION 2.0 · 05/2026</div>
+        <div class="vsn" style="margin-top: 4px;">JAVICO.VN</div>
+      </div>
+    </div>
+  </div>
+  <span class="page-num">01 / 12</span>
+</div>
+
+<!-- ============ PAGE 2 · CONTENTS ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">Mục lục</div>
+    <h2 class="sec">Trong tài liệu này</h2>
+    <p class="lead" style="margin: 20px 0 60px;">12 trang — đọc từ trên xuống. Mọi quyết định visual đều có lý do, và lý do nằm trong từng phần.</p>
+
+    <div class="toc">
+      <div class="toc-item"><span><span class="n">01</span><span class="t">Bìa & định vị thương hiệu</span></span><span class="pg">p. 01</span></div>
+      <div class="toc-item"><span><span class="n">02</span><span class="t">Mục lục</span></span><span class="pg">p. 02</span></div>
+      <div class="toc-item"><span><span class="n">03</span><span class="t">Định vị & tinh thần</span></span><span class="pg">p. 03</span></div>
+      <div class="toc-item"><span><span class="n">04</span><span class="t">Logo & clearspace</span></span><span class="pg">p. 04</span></div>
+      <div class="toc-item"><span><span class="n">05</span><span class="t">Bảng màu chuẩn</span></span><span class="pg">p. 05</span></div>
+      <div class="toc-item"><span><span class="n">06</span><span class="t">Typography</span></span><span class="pg">p. 06</span></div>
+      <div class="toc-item"><span><span class="n">07</span><span class="t">4 motif DNA</span></span><span class="pg">p. 07</span></div>
+      <div class="toc-item"><span><span class="n">08</span><span class="t">Title pattern bắt buộc</span></span><span class="pg">p. 08</span></div>
+      <div class="toc-item"><span><span class="n">09</span><span class="t">Sticker pack & assets</span></span><span class="pg">p. 09</span></div>
+      <div class="toc-item"><span><span class="n">10</span><span class="t">Voice & tone</span></span><span class="pg">p. 10</span></div>
+      <div class="toc-item"><span><span class="n">11</span><span class="t">Do / Don't & application</span></span><span class="pg">p. 11</span></div>
+      <div class="toc-item"><span><span class="n">12</span><span class="t">File specs & naming</span></span><span class="pg">p. 12</span></div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">02 / 12</span>
+</div>
+
+<!-- ============ PAGE 3 · POSITIONING ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">03 · Định vị</div>
+    <h2 class="sec">Chuyên gia <em>Du học Đài Loan</em> Elite cho học sinh giỏi Hà Nội.</h2>
+    <p class="lead" style="margin-top: 16px;">JAVICO không phải agency du học đại trà. 14 năm kinh nghiệm, suất độc quyền tại Pegatron và ĐH Minh Truyền, tỉ lệ visa đậu 98%. Brand này nói đúng một thứ: <strong>đầu tư cho con là đầu tư sinh lời</strong>.</p>
+
+    <div style="margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+      <div>
+        <div class="eye" style="margin-bottom: 10px;">Khách hàng mục tiêu</div>
+        <h3 style="font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 26px; margin-bottom: 18px;">Học sinh GPA 7.5+ · Phụ huynh thu nhập 80–200tr/tháng</h3>
+        <p style="font-size: 15px; line-height: 1.7;">16–18 tuổi, trường Chuyên Hà Nội (Cầu Giấy · Tây Hồ · Hoàn Kiếm). IELTS 6.0+ hoặc HSK3+. Phụ huynh 42–50 tuổi, doanh nhân / cán bộ cao.</p>
+      </div>
+      <div>
+        <div class="eye" style="margin-bottom: 10px;">Tinh thần thương hiệu</div>
+        <div style="background: #fff; border-radius: 16px; padding: 22px 26px;">
+          <div style="display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; align-items: center; font-size: 14px;">
+            <span>Trẻ trung (Youthful)</span><span style="color: var(--coral); font-weight: 700; letter-spacing: 2px;">●●●●●</span>
+            <span>Năng động (Vibrant)</span><span style="color: var(--coral); font-weight: 700; letter-spacing: 2px;">●●●●●</span>
+            <span>Minh bạch (Transparent)</span><span style="color: var(--coral); font-weight: 700; letter-spacing: 2px;">●●●●●</span>
+            <span>Đáng tin (Trustworthy)</span><span style="color: var(--coral); font-weight: 700; letter-spacing: 2px;">●●●●○</span>
+            <span>Thân thiện (Friendly)</span><span style="color: var(--coral); font-weight: 700; letter-spacing: 2px;">●●●●○</span>
+            <span>Sang trọng (Premium)</span><span style="color: var(--coral); font-weight: 700; letter-spacing: 2px;">●●●○○</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 50px; padding: 30px 36px; background: var(--ink); border-radius: 18px;">
+      <div class="eye" style="color: var(--yellow);">Slogan & sub-tagline</div>
+      <div style="font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 56px; color: #fff; line-height: 1.05; margin-top: 10px;">"Ê, đi <span style="color: var(--coral);">Đài Loan</span> thôi!"</div>
+      <p style="color: rgba(255,255,255,.8); margin-top: 14px; font-size: 16px; max-width: 720px;">Học bổng đến 100% · Vừa học vừa kiếm xèng · Lộ trình sang Mỹ – Anh – Úc</p>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">03 / 12</span>
+</div>
+
+<!-- ============ PAGE 4 · LOGO ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">04 · Logo</div>
+    <h2 class="sec">Logo system</h2>
+    <p class="lead">Mark JAVICO là một tam giác hướng lên cắt khỏi vòng tròn đỏ — biểu tượng của hành trình vươn lên. Luôn dùng trên nền đen tối thiểu, hoặc lockup ngang với wordmark.</p>
+
+    <div class="logo-grid">
+      <div class="lg-card">
+        <div class="lg-mark k"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="logo"></div>
+        <div class="label">Primary · on light</div>
+      </div>
+      <div class="lg-card dark">
+        <div class="lg-mark"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="logo"></div>
+        <div class="label">Inverse · on dark</div>
+      </div>
+      <div class="lg-card coral">
+        <div class="lg-mark w"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="logo"></div>
+        <div class="label">On coral · plate white</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;">
+      <div>
+        <h3>Clearspace</h3>
+        <p style="font-size: 14px; margin-bottom: 6px;">Khoảng trống xung quanh logo bằng chiều rộng (X) của mark.</p>
+        <div class="cs-wrap">
+          <div class="cs-box">
+            <div class="cs-inner"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="logo"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>Minimum size</h3>
+        <p style="font-size: 14px; margin-bottom: 14px;">Mark không bao giờ dưới 24×24px. Lockup không dưới 100×40px.</p>
+        <div style="background: #fff; border-radius: 18px; padding: 28px; display: flex; align-items: center; justify-content: center; gap: 28px;">
+          <div style="text-align: center;">
+            <div style="background: var(--ink); border-radius: 6px; width: 24px; height: 24px; padding: 3px;"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="24px" style="width: 100%; height: 100%; object-fit: contain;"></div>
+            <div class="tk" style="margin-top: 8px;">24 px</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="background: var(--ink); border-radius: 10px; width: 48px; height: 48px; padding: 6px;"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="48px" style="width: 100%; height: 100%; object-fit: contain;"></div>
+            <div class="tk" style="margin-top: 8px;">48 px</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="background: var(--ink); border-radius: 14px; width: 72px; height: 72px; padding: 8px;"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="72px" style="width: 100%; height: 100%; object-fit: contain;"></div>
+            <div class="tk" style="margin-top: 8px;">72 px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dosgrid" style="margin-top: 36px;">
+      <div class="rcard">
+        <h4>DO — luôn làm</h4>
+        <ul>
+          <li>Đặt mark trên nền đen (cream / coral cũng OK với plate)</li>
+          <li>Giữ clearspace = chiều rộng mark</li>
+          <li>Lockup ngang khi có wordmark JAVICO + DU HỌC ĐÀI LOAN</li>
+        </ul>
+      </div>
+      <div class="rcard bad">
+        <h4>DON'T — tuyệt đối tránh</h4>
+        <ul>
+          <li>Đặt mark đỏ trực tiếp trên nền cream — luôn cần plate đen</li>
+          <li>Xoay, kéo méo, đổi màu mark</li>
+          <li>Thêm shadow / glow / gradient lên logo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">04 / 12</span>
+</div>
+
+<!-- ============ PAGE 5 · COLOR ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">05 · Palette</div>
+    <h2 class="sec">Bảng màu chuẩn — <em>60 · 15 · 10 · 10 · 5</em></h2>
+    <p class="lead">5 màu, tỉ lệ cố định. Cream là nền chính chiếm 60% diện tích. Coral là primary accent. Mint, Yellow là secondary. Black là text + CTA tối quan trọng.</p>
+
+    <div class="color-grid">
+      <div class="cc">
+        <div class="swatch" style="background: var(--cream);"><div class="pct" style="color: var(--ink);">60%</div></div>
+        <div class="meta">
+          <div class="nm" style="color: var(--ink);">Cream Bg</div>
+          <span class="hex">HEX #FFF0E6</span>
+          <span class="rgb">RGB 255 · 240 · 230</span>
+          <span class="cmyk">CMYK 0 · 6 · 10 · 0</span>
+        </div>
+      </div>
+      <div class="cc">
+        <div class="swatch" style="background: var(--coral);"><div class="pct">15%</div></div>
+        <div class="meta">
+          <div class="nm" style="color: var(--coral);">Coral</div>
+          <span class="hex">HEX #FF6B6B</span>
+          <span class="rgb">RGB 255 · 107 · 107</span>
+          <span class="cmyk">CMYK 0 · 71 · 48 · 0</span>
+        </div>
+      </div>
+      <div class="cc">
+        <div class="swatch" style="background: var(--mint);"><div class="pct">10%</div></div>
+        <div class="meta">
+          <div class="nm" style="color: var(--mint-2);">Mint</div>
+          <span class="hex">HEX #4ECDC4</span>
+          <span class="rgb">RGB 78 · 205 · 196</span>
+          <span class="cmyk">CMYK 62 · 0 · 31 · 0</span>
+        </div>
+      </div>
+      <div class="cc lt">
+        <div class="swatch" style="background: var(--yellow);"><div class="pct">10%</div></div>
+        <div class="meta">
+          <div class="nm" style="color: var(--yellow-2);">Yellow</div>
+          <span class="hex">HEX #FFD93D</span>
+          <span class="rgb">RGB 255 · 217 · 61</span>
+          <span class="cmyk">CMYK 0 · 13 · 84 · 0</span>
+        </div>
+      </div>
+      <div class="cc">
+        <div class="swatch" style="background: var(--ink);"><div class="pct" style="color: var(--yellow);">5%</div></div>
+        <div class="meta">
+          <div class="nm">Black Ink</div>
+          <span class="hex">HEX #1A1A1A</span>
+          <span class="rgb">RGB 26 · 26 · 26</span>
+          <span class="cmyk">CMYK 70 · 60 · 60 · 90</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <h3>Tỉ lệ phân bổ trong layout</h3>
+      <p style="font-size: 14px; margin-bottom: 14px;">Mọi ấn phẩm phải tuân thủ tỉ lệ này — đo bằng diện tích, không phải số element.</p>
+      <div style="display: flex; height: 50px; border-radius: 10px; overflow: hidden;">
+        <div style="flex: 60; background: var(--cream); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--ink); border-right: 1px dashed var(--ink);">60% Cream</div>
+        <div style="flex: 15; background: var(--coral); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #fff;">15% Coral</div>
+        <div style="flex: 10; background: var(--mint); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: #fff;">10% Mint</div>
+        <div style="flex: 10; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--ink);">10% Yellow</div>
+        <div style="flex: 5; background: var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: var(--yellow);">5% K</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+      <div style="background: #fff; border-radius: 12px; padding: 18px;"><div class="tk">Coral tint 12%</div><div style="background: rgba(255,107,107,.12); height: 40px; border-radius: 8px; margin-top: 8px;"></div></div>
+      <div style="background: #fff; border-radius: 12px; padding: 18px;"><div class="tk">Mint tint 12%</div><div style="background: rgba(78,205,196,.12); height: 40px; border-radius: 8px; margin-top: 8px;"></div></div>
+      <div style="background: #fff; border-radius: 12px; padding: 18px;"><div class="tk">Yellow tint 18%</div><div style="background: rgba(255,217,61,.18); height: 40px; border-radius: 8px; margin-top: 8px;"></div></div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">05 / 12</span>
+</div>
+
+<!-- ============ PAGE 6 · TYPE ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">06 · Type</div>
+    <h2 class="sec">Typography</h2>
+    <p class="lead">Hai họ chính + hai accent display. Headline chính dùng <strong>Big Shoulders Display</strong> 800 italic (Latin condensed) cho tiêu đề ALL-CAPS — Vietnamese full-support. Khi cần italic-serif truyền thống (sentence-case), dùng Georgia. Body — Be Vietnam Pro.</p>
+
+    <div style="margin-top: 30px;">
+      <div class="typ-row">
+        <div class="typ-name">DISPLAY CHÍNH — BIG SHOULDERS DISPLAY 800 ITALIC</div>
+        <div class="typ-display">Ê, ĐI <em>ĐÀI LOAN</em> THÔI!</div>
+        <div class="typ-spec">Big Shoulders Display · italic · 800 · 110px · letter-spacing -3px · line-height .9 · UPPERCASE</div>
+      </div>
+      <div class="typ-row">
+        <div class="typ-name">DISPLAY SENTENCE-CASE — GEORGIA ITALIC (legacy / serif accent)</div>
+        <div class="typ-display-vi">Ê, đi <em>Đài Loan</em></div>
+        <div class="typ-spec">Georgia · italic · 800 · 80px · cho website + quốc dân sentence case</div>
+      </div>
+      <div class="typ-row">
+        <div class="typ-name">SECTION TITLE / H2</div>
+        <div class="typ-h2-sample">Vì sao chọn <em style="color: var(--coral); font-style: italic;">JAVICO</em>?</div>
+        <div class="typ-spec">Georgia · italic · 800 · 36px · letter-spacing -1px · line-height 1.2</div>
+      </div>
+      <div class="typ-row">
+        <div class="typ-name">BODY</div>
+        <div class="typ-body-sample">Chi phí từ <strong>36 triệu</strong> · Học bổng tới <strong>100%</strong> · Làm thêm <strong>15–20 triệu/tháng</strong>. Không cần tiếng Hoa, hỗ trợ A–Z, tư vấn miễn phí trong 24h.</div>
+        <div class="typ-spec">Be Vietnam Pro · 400 · 16px · line-height 1.65 · Bold cho con số</div>
+      </div>
+      <div class="typ-row">
+        <div class="typ-name">CAVEAT — UTM ATLAS / AIRCONA (legacy VN encoding)</div>
+        <div class="typ-utm">JAVICO TAIWAN 2026</div>
+        <div class="typ-spec">UTM Atlas Solid · 700 · chỉ ALL-CAPS Latin không dấu (JAVICO · TAIWAN · E7 · 36 · 98%). Có diều thì mojibake.</div>
+      </div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">06 / 12</span>
+</div>
+
+<!-- ============ PAGE 7 · MOTIF DNA ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">07 · DNA + treatments</div>
+    <h2 class="sec">4 motif locked + 2 treatment layers</h2>
+    <p class="lead">4 motif dưới đây là LOCKED — bắt buộc xuất hiện trong mọi ấn phẩm chính thức. 2 treatment layer (halftone + hand-drawn annotation) là v2 evolution — tốt cho posters, social, print; tùy chọn cho web.</p>
+
+    <div class="motifs" style="grid-template-columns: 1fr 1fr 1fr; gap: 18px;">
+      <div class="motif-card">
+        <div class="mn">01 · sticker · ✱ LOCKED</div>
+        <h3>Sticker pill xoay so le</h3>
+        <div class="demo">
+          <span class="demo-sticker ds-y">6 hệ</span>
+          <span class="demo-sticker ds-m">VHVL</span>
+          <span class="demo-sticker ds-c">Cam kết</span>
+        </div>
+        <div class="note">Thứ tự: <code>yellow -3° / mint +2° / coral -3°</code>. Pill radius = height÷2.</div>
+      </div>
+
+      <div class="motif-card">
+        <div class="mn">02 · wavy · ✱ LOCKED</div>
+        <h3>Wavy underline mint</h3>
+        <div class="demo">
+          <div class="demo-title">
+            <span class="l2" style="display: inline-block;">ĐÀI LOAN
+              <svg style="display: block; height: 12px; width: 200px; margin: -2px 0 0;" viewBox="0 0 200 12" preserveAspectRatio="none">
+                <path d="M 0 6 C 12 0 25 12 37 6 S 62 0 75 6 S 100 12 112 6 S 137 0 150 6 S 175 12 187 6 S 200 6 200 6" stroke="#FF6B6B" stroke-width="5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="note">S-curve loose hand-drawn (v2). Tần số 22–28px · stroke 7–9px · mint hoặc coral.</div>
+      </div>
+
+      <div class="motif-card">
+        <div class="mn">03 · circles · ✱ LOCKED</div>
+        <h3>3 vòng tròn — không 4</h3>
+        <div class="demo">
+          <div class="demo-circles">
+            <div class="dc dc-coral"></div>
+            <div class="dc dc-mint"></div>
+            <div class="dc dc-y"></div>
+          </div>
+        </div>
+        <div class="note">Coral lg top-right · Mint lg bottom-left · Yellow sm accent. 1 góc trống thở.</div>
+      </div>
+
+      <div class="motif-card">
+        <div class="mn">04 · badge · ✱ LOCKED</div>
+        <h3>Badge đen góc vuông — top-left</h3>
+        <div class="demo">
+          <span class="demo-badge">✱ JAVICO 2026</span>
+        </div>
+        <div class="note">Bg <code>#1A1A1A</code> · letter-spacing 3px · radius 4px. Luôn top-left.</div>
+      </div>
+
+      <div class="motif-card">
+        <div class="mn">05 · treatment · v2</div>
+        <h3>Halftone dot patches</h3>
+        <div class="demo" style="position: relative; overflow: hidden;">
+          <div style="width: 200px; height: 80px; color: var(--coral); opacity: .6; background-image: radial-gradient(circle at center, currentColor 1.5px, transparent 1.8px); background-size: 14px 14px; -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%);"></div>
+        </div>
+        <div class="note">Radial dot pattern coral 12–14px grid · elliptical fade mask. Cho phông print/poster.</div>
+      </div>
+
+      <div class="motif-card">
+        <div class="mn">06 · treatment · v2</div>
+        <h3>Hand-drawn annotation</h3>
+        <div class="demo">
+          <div style="position: relative; font-family: var(--fhand); font-weight: 700; color: var(--ink); font-size: 36px; padding: 4px 14px; transform: rotate(-4deg);">
+            <span style="font-size: 24px; font-style: italic; margin-right: 4px;">ở</span> ĐÀI BẮC
+            <svg viewBox="0 0 160 70" preserveAspectRatio="none" style="position: absolute; inset: -8px -14px; width: calc(100% + 28px); height: calc(100% + 16px); pointer-events: none;">
+              <path d="M 80 6 C 36 8 8 22 10 38 C 12 58 50 66 86 64 C 122 62 150 50 148 34 C 146 18 110 6 80 6 Z" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="note">Caveat font · oval scribble · xoay -4 to -8°. Cho location/version/note callouts.</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; background: var(--ink); color: #fff; border-radius: 18px; padding: 22px 28px; display: flex; align-items: center; gap: 24px;">
+      <div style="flex-shrink: 0; width: 80px; height: 80px; background: var(--mint); border-radius: 12px; display: grid; place-items: center; font-family: 'Songti SC', serif; font-weight: 900; font-size: 60px; color: var(--ink); line-height: 1;">臺</div>
+      <div style="flex: 1;"><div class="eye" style="color: var(--yellow); margin-bottom: 6px;">Hero-only motif</div><strong style="font-family: var(--fcond); font-style: italic; font-size: 28px; line-height: 1; letter-spacing: -.5px; text-transform: uppercase;">Big mint 臺 stamp</strong><div style="font-size: 14px; margin-top: 6px; color: rgba(255,255,255,.85); line-height: 1.5;">Chỉ dùng cho hero KV (1920×1080) và A4 flyer. Songti/Noto Serif TC · mint · opacity .5–.6 · halftone overlay cream cho print texture. Không dùng trên social formats nhỏ.</div></div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">07 / 12</span>
+</div>
+
+<!-- ============ PAGE 8 · TITLE PATTERN ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">08 · Title pattern</div>
+    <h2 class="sec">Title 3 dòng — DNA bắt buộc</h2>
+    <p class="lead">Mọi hero / poster lớn phải dùng cấu trúc title 3 dòng. Đây là cấu trúc — không phải gợi ý.</p>
+
+    <div style="background: #fff; border-radius: 24px; padding: 50px 60px; margin-top: 30px; position: relative; overflow: hidden;">
+      <div style="position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; border-radius: 50%; background: var(--coral); opacity: .2;"></div>
+      <div style="position: absolute; left: -30px; bottom: -30px; width: 140px; height: 140px; border-radius: 50%; background: var(--mint); opacity: .2;"></div>
+
+      <div style="display: grid; grid-template-columns: auto 1fr; gap: 60px; align-items: center; position: relative; z-index: 2;">
+        <div>
+          <div style="font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 110px; line-height: .9; letter-spacing: -3px; text-transform: uppercase;">
+            <div style="color: var(--ink);">Ê, ĐI</div>
+            <div style="color: var(--coral); display: inline-block;">ĐÀI LOAN
+              <svg style="display: block; height: 16px; width: 360px; margin: -2px 0 0;" viewBox="0 0 360 16" preserveAspectRatio="none">
+                <path d="M 0 8 C 14 0 28 16 42 8 S 70 0 84 8 S 112 16 126 8 S 154 0 168 8 S 196 16 210 8 S 238 0 252 8 S 280 16 294 8 S 322 0 336 8 S 360 8 360 8" stroke="#FF6B6B" stroke-width="7" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div style="color: var(--ink);">THÔI!</div>
+          </div>
+        </div>
+        <div>
+          <table style="border-collapse: collapse; font-size: 14px; width: 100%;">
+            <tr>
+              <td style="padding: 12px 14px; background: var(--cream); border-radius: 8px 8px 0 0; width: 80px; vertical-align: top;"><span class="tk">Line 1</span></td>
+              <td style="padding: 12px 14px; background: var(--cream); border-radius: 0;"><strong>Đen</strong> · setup gọi, tone thân mật. Ngắn: 1–2 từ.</td>
+            </tr>
+            <tr><td style="height: 4px;"></td><td></td></tr>
+            <tr>
+              <td style="padding: 12px 14px; background: rgba(255,107,107,.12); width: 80px; vertical-align: top;"><span class="tk">Line 2</span></td>
+              <td style="padding: 12px 14px; background: rgba(255,107,107,.12);"><strong style="color: var(--coral);">Coral + hand-drawn wavy dưới</strong> · điểm rơi chính. "ĐÀI LOAN" hoặc keyword chiến lược.</td>
+            </tr>
+            <tr><td style="height: 4px;"></td><td></td></tr>
+            <tr>
+              <td style="padding: 12px 14px; background: var(--cream); border-radius: 0 0 8px 8px; width: 80px; vertical-align: top;"><span class="tk">Line 3</span></td>
+              <td style="padding: 12px 14px; background: var(--cream);"><strong>Đen</strong> · payoff. Câu mời / dấu chấm than.</td>
+            </tr>
+          </table>
+          <p style="margin-top: 20px; font-size: 14px; color: var(--ink); line-height: 1.6;">Fộ ALL-CAPS (Big Shoulders Display) cho posters / social hero. Sentence-case (Georgia italic) cho web body, FAQ headers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 24px;">
+      <div style="background: #fff; border-radius: 14px; padding: 20px;">
+        <div class="tk" style="margin-bottom: 8px;">BIẾN THỂ 01</div>
+        <div style="font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 40px; line-height: .95; letter-spacing: -1px; text-transform: uppercase;">ĐẦU TƯ<br><span style="color: var(--coral);">CHO CON</span><br>TƯƠNG LAI.</div>
+      </div>
+      <div style="background: #fff; border-radius: 14px; padding: 20px;">
+        <div class="tk" style="margin-bottom: 8px;">BIẾN THỂ 02</div>
+        <div style="font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 40px; line-height: .95; letter-spacing: -1px; text-transform: uppercase;">VỪ HOC<br><span style="color: var(--coral);">VỪ KIẾM</span><br>XÈNG.</div>
+      </div>
+      <div style="background: #fff; border-radius: 14px; padding: 20px;">
+        <div class="tk" style="margin-bottom: 8px;">BIẾN THỂ 03</div>
+        <div style="font-family: var(--fcond); font-style: italic; font-weight: 800; font-size: 40px; line-height: .95; letter-spacing: -1px; text-transform: uppercase;">HỌC BỔNG<br><span style="color: var(--coral);">100%</span><br>ĐÂY.</div>
+      </div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">08 / 12</span>
+</div>
+
+<!-- ============ PAGE 9 · STICKER PACK ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">09 · Asset pack</div>
+    <h2 class="sec">Sticker pack & decoratives</h2>
+    <p class="lead">10 sticker mẫu sẵn sàng để team copy-paste. Tỉ lệ màu 4 yellow / 3 mint / 3 coral. Mỗi lần dùng phải xoay theo motif.</p>
+
+    <div class="pack">
+      <span class="stk y"><span style="width: 18px; height: 18px; background: rgba(0,0,0,.18); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">★</span>HọC BỔNG 100%</span>
+      <span class="stk m"><span style="width: 18px; height: 18px; background: rgba(255,255,255,.25); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">✓</span>VỪ HỌC VỪ LÀM</span>
+      <span class="stk c"><span style="width: 18px; height: 18px; background: rgba(255,255,255,.22); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">↗</span>CAM KẾT HOÀN TIỀN</span>
+      <span class="stk y"><span style="width: 18px; height: 18px; background: rgba(0,0,0,.18); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">★</span>6 HỆ ĐÀO TẠO</span>
+      <span class="stk m"><span style="width: 18px; height: 18px; background: rgba(255,255,255,.25); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">✓</span>98% VISA ĐẬU</span>
+      <span class="stk c"><span style="width: 18px; height: 18px; background: rgba(255,255,255,.22); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">↗</span>14 NĂM KINH NGHIỆM</span>
+      <span class="stk y"><span style="width: 18px; height: 18px; background: rgba(0,0,0,.18); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">★</span>36 TRIỆU KHỞI ĐIỂM</span>
+      <span class="stk m"><span style="width: 18px; height: 18px; background: rgba(255,255,255,.25); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">✓</span>2.000+ SINH VIÊN</span>
+      <span class="stk c"><span style="width: 18px; height: 18px; background: rgba(255,255,255,.22); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">↗</span>20+ TRƯỜNG ĐỐI TÁC</span>
+      <span class="stk y"><span style="width: 18px; height: 18px; background: rgba(0,0,0,.18); border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; margin-right: 8px;">★</span>TƯ VẤN 24H</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px;">
+      <div>
+        <h3>Wavy underline · 5 độ dài</h3>
+        <div style="background: #fff; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <svg height="14" width="120"><path class="jvc-wavy" stroke-width="6" d="M0 7 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0"/></svg>
+          <svg height="14" width="200"><path class="jvc-wavy" stroke-width="6" d="M0 7 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0"/></svg>
+          <svg height="14" width="300"><path class="jvc-wavy" stroke-width="6" d="M0 7 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0"/></svg>
+          <svg height="14" width="400"><path class="jvc-wavy" stroke-width="6" d="M0 7 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0 q10-7 20 0 q10 7 20 0"/></svg>
+        </div>
+      </div>
+      <div>
+        <h3>Deco circle library</h3>
+        <div style="background: #fff; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; min-height: 140px;">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: var(--coral);"></div>
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--coral);"></div>
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--coral);"></div>
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: var(--mint);"></div>
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--mint);"></div>
+          <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--mint);"></div>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: var(--yellow);"></div>
+          <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--yellow);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">09 / 12</span>
+</div>
+
+<!-- ============ PAGE 10 · VOICE ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">10 · Voice</div>
+    <h2 class="sec">Tiếng nói "anh dẫn đường"</h2>
+    <p class="lead">Thân thiện · tích cực · có số liệu cụ thể · không sáo rỗng. Như một anh đi trước đang kể lại cho em. Xưng "bạn / con / em" — không xưng "anh chị em".</p>
+
+    <div class="vox">
+      <div class="vx-good">
+        <div class="lab">✓ Dùng</div>
+        <div class="txt">"Chi phí từ 36 triệu — tư vấn miễn phí trong 24h."</div>
+      </div>
+      <div class="vx-bad">
+        <div class="lab">✕ Tránh</div>
+        <div class="txt">"Du học rẻ nhất Việt Nam, không nơi nào có."</div>
+      </div>
+
+      <div class="vx-good">
+        <div class="lab">✓ Dùng</div>
+        <div class="txt">"Học bổng MOFA/MOE — 60% sinh viên JAVICO 2025 đã đậu."</div>
+      </div>
+      <div class="vx-bad">
+        <div class="lab">✕ Tránh</div>
+        <div class="txt">"Học bổng 100% miễn phí cho tất cả!"</div>
+      </div>
+
+      <div class="vx-good">
+        <div class="lab">✓ Dùng</div>
+        <div class="txt">"14 năm đưa người Việt sang Đài Loan an toàn."</div>
+      </div>
+      <div class="vx-bad">
+        <div class="lab">✕ Tránh</div>
+        <div class="txt">"100% đỗ visa, đảm bảo thành công!"</div>
+      </div>
+
+      <div class="vx-good">
+        <div class="lab">✓ Dùng</div>
+        <div class="txt">"Ê, đi Đài Loan thôi!" — gọi mời thân mật, tích cực.</div>
+      </div>
+      <div class="vx-bad">
+        <div class="lab">✕ Tránh</div>
+        <div class="txt">"Cánh cửa vàng đến tương lai rực rỡ."</div>
+      </div>
+
+      <div class="vx-good">
+        <div class="lab">✓ Dùng</div>
+        <div class="txt">"Lộ trình rõ ràng — chi phí trung thực."</div>
+      </div>
+      <div class="vx-bad">
+        <div class="lab">✕ Tránh</div>
+        <div class="txt">"Du học Đài Loan — Giấc mơ vươn xa."</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px; background: var(--ink); color: #fff; border-radius: 18px; padding: 28px 32px;">
+      <div class="eye" style="color: var(--yellow);">Quy tắc rút gọn</div>
+      <ul style="list-style: none; margin-top: 14px; columns: 2; column-gap: 30px;">
+        <li style="padding: 6px 0; font-size: 15px;">→ Số liệu cụ thể &gt; tính từ đẹp</li>
+        <li style="padding: 6px 0; font-size: 15px;">→ Tên trường thật &gt; "trường top"</li>
+        <li style="padding: 6px 0; font-size: 15px;">→ Câu chuyện thật &gt; lời hứa hẹn</li>
+        <li style="padding: 6px 0; font-size: 15px;">→ "Bạn / con / em" &gt; "quý khách"</li>
+        <li style="padding: 6px 0; font-size: 15px;">→ Tiếng Việt thuần &gt; chêm English</li>
+        <li style="padding: 6px 0; font-size: 15px;">→ 1 câu ngắn &gt; 1 đoạn dài</li>
+      </ul>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">10 / 12</span>
+</div>
+
+<!-- ============ PAGE 11 · DO/DON'T + APPS ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">11 · Rules & application</div>
+    <h2 class="sec">Do / Don't</h2>
+
+    <div class="dosgrid">
+      <div class="rcard">
+        <h4>DO — luôn làm</h4>
+        <ul>
+          <li>Title 3 dòng pattern (đen / coral + wavy / đen)</li>
+          <li>3 sticker xoay so le yellow / mint / coral</li>
+          <li>Badge đen top-left, không di chuyển</li>
+          <li>Để 1 góc trống thở (không bao giờ 4 circle)</li>
+          <li>Flat design — phẳng, không shadow / gradient</li>
+          <li>Số liệu cụ thể — 36tr, 98%, 14 năm</li>
+          <li>Icon outline Tabler / Phosphor 1.5–2px stroke</li>
+          <li>Ảnh thật DHS — không stock công sở</li>
+        </ul>
+      </div>
+      <div class="rcard bad">
+        <h4>DON'T — tuyệt đối tránh</h4>
+        <ul>
+          <li>Bỏ wavy dưới "Đài Loan" — mất DNA</li>
+          <li>Gradient / shadow / glow / neon ở mọi nơi</li>
+          <li>Font khác Georgia / Be Vietnam Pro</li>
+          <li>Bỏ badge JAVICO top-left</li>
+          <li>Emoji 🌸 🎉 ✨ trong ấn phẩm chính</li>
+          <li>Stock photo Asian công sở sang chảnh</li>
+          <li>Sticker thẳng hàng (cùng góc xoay)</li>
+          <li>Circle ở cả 4 góc</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 36px; font-family: var(--fd); font-style: italic; font-size: 28px;">Application gallery</h3>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">Mẫu áp dụng đúng brand DNA — đầy đủ 4 motif ở mọi kích thước.</p>
+
+    <div class="apps">
+      <div class="app">
+        <div class="ph">
+          <div class="b">★ JAVICO 2026</div>
+          <div class="dc"></div>
+          <div class="dm"></div>
+          <div class="t">Ê, đi <span class="c">Đài Loan</span> thôi!</div>
+        </div>
+        <div class="lab">A4 · 1240×1754</div>
+      </div>
+      <div class="app">
+        <div class="ph">
+          <div class="b">★ JAVICO</div>
+          <div class="dc" style="width: 100px; height: 100px;"></div>
+          <div class="dm" style="width: 80px; height: 80px;"></div>
+          <div class="t">Học bổng <span class="c">100%</span> đây</div>
+        </div>
+        <div class="lab">IG · 1080×1080</div>
+      </div>
+      <div class="app">
+        <div class="ph">
+          <div class="b">★ JAVICO</div>
+          <div class="dc"></div>
+          <div class="dm"></div>
+          <div class="t">Vừa <span class="c">học vừa kiếm</span> xèng.</div>
+        </div>
+        <div class="lab">Story · 1080×1920</div>
+      </div>
+    </div>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">11 / 12</span>
+</div>
+
+<!-- ============ PAGE 12 · FILE SPECS ============ -->
+<div class="page">
+  <div class="page-pad">
+    <div class="eye">12 · Production</div>
+    <h2 class="sec">File specs & naming</h2>
+
+    <div style="background: #fff; border-radius: 18px; padding: 28px 32px; margin-top: 24px;">
+      <h3>Naming convention</h3>
+      <pre style="background: var(--ink); color: var(--yellow); padding: 18px 22px; border-radius: 12px; font-size: 13px; line-height: 1.7; overflow-x: auto; margin-top: 12px;">JAVICO_DL_[loai]_[ten]_[phienban]_[ngay].[duoi]
+
+JAVICO_DL_logo_main_v1_20260520.svg
+JAVICO_DL_poster_A4_kyT9_v2_20260605.png
+JAVICO_DL_igsquare_hocbongMCU_v1_20260612.png
+JAVICO_DL_video_testimonial_Eric_v3_20260615.mp4</pre>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <h3>Export specs</h3>
+      <div style="background: #fff; border-radius: 18px; padding: 0; margin-top: 12px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="background: var(--ink); color: #fff; text-align: left;">
+              <th style="padding: 14px 20px; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Asset</th>
+              <th style="padding: 14px 20px; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Source</th>
+              <th style="padding: 14px 20px; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Export</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;"><strong>Logo</strong></td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;">SVG (Figma / AI)</td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0; font-family: ui-monospace, monospace; font-size: 12px;">SVG + PNG @1x/2x/4x + ICO</td></tr>
+            <tr><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;"><strong>Social PNG</strong></td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;">Figma</td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0; font-family: ui-monospace, monospace; font-size: 12px;">PNG 2x density, sRGB</td></tr>
+            <tr><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;"><strong>Print</strong></td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;">AI + Figma</td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0; font-family: ui-monospace, monospace; font-size: 12px;">PDF/X-1a CMYK FOGRA51 + bleed 3mm</td></tr>
+            <tr><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;"><strong>Video</strong></td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;">AE / Premiere</td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0; font-family: ui-monospace, monospace; font-size: 12px;">MP4 H.264 + MOV ProRes</td></tr>
+            <tr><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;"><strong>Animation</strong></td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0;">Lottie</td><td style="padding: 14px 20px; border-bottom: 1px solid #f0eae0; font-family: ui-monospace, monospace; font-size: 12px;">JSON + MP4 fallback</td></tr>
+            <tr><td style="padding: 14px 20px;"><strong>Icon</strong></td><td style="padding: 14px 20px;">Figma → SVG</td><td style="padding: 14px 20px; font-family: ui-monospace, monospace; font-size: 12px;">SVG optimized &lt; 5KB</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 24px;">
+      <div style="background: var(--mint); color: #fff; border-radius: 18px; padding: 22px 26px;">
+        <div class="eye" style="color: #fff;">SLA</div>
+        <div style="font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 28px; margin-top: 8px;">48 giờ</div>
+        <div style="font-size: 13px; margin-top: 4px;">Henry phản hồi sau khi designer ping. Quy trình duyệt v1 → v2 → final.</div>
+      </div>
+      <div style="background: var(--coral); color: #fff; border-radius: 18px; padding: 22px 26px;">
+        <div class="eye" style="color: #fff;">Brand audit</div>
+        <div style="font-family: var(--fd); font-style: italic; font-weight: 800; font-size: 28px; margin-top: 8px;">Mỗi quý</div>
+        <div style="font-size: 13px; margin-top: 4px;">Henry hoặc Sales Lead audit toàn bộ asset đã publish — fix gap consistency.</div>
+      </div>
+    </div>
+
+    <p style="text-align: center; font-size: 13px; color: var(--muted); margin-top: 48px; letter-spacing: 1px;">JAVICO BRAND GUIDELINES · v1.0 · 05/2026 · javico.vn</p>
+  </div>
+  <span class="page-foot">JAVICO BRAND GUIDELINES · 2026</span>
+  <span class="page-num">12 / 12</span>
+</div>
+
+</body>
+</html>

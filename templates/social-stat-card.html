@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>JAVICO — Stat Card v2 · 1080×1080</title>
+<link rel="stylesheet" href="_lib.css">
+<style>
+  body { background: #1a1a1a; }
+  .stage { width: 1080px; height: 1080px; background: var(--cream); position: relative; overflow: hidden; margin: 0 auto; transform-origin: top left; }
+  @media (max-width: 1080px) { body { display: block; } .stage { transform: scale(calc(100vw / 1080)); } }
+
+  .c-coral { position: absolute; width: 600px; height: 600px; top: -200px; right: -160px; background: var(--coral); border-radius: 50%; z-index: 1; }
+  .c-mint  { position: absolute; width: 320px; height: 320px; bottom: -120px; left: -80px; background: var(--mint); border-radius: 50%; opacity: .85; z-index: 1; }
+  .c-y     { position: absolute; width: 90px; height: 90px; top: 400px; right: 240px; background: var(--yellow); border-radius: 50%; z-index: 1; }
+  .c-y2    { position: absolute; width: 60px; height: 60px; top: 220px; left: 90px; background: var(--yellow); border-radius: 50%; z-index: 1; }
+
+  .halftone-tm { position: absolute; top: 50px; left: 380px; width: 240px; height: 110px; color: var(--coral); opacity: .55; background-image: radial-gradient(circle at center, currentColor 1.3px, transparent 1.6px); background-size: 12px 12px; -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); z-index: 1; }
+  .halftone-br { position: absolute; bottom: 200px; right: 60px; width: 200px; height: 100px; color: var(--coral); opacity: .45; background-image: radial-gradient(circle at center, currentColor 1.3px, transparent 1.6px); background-size: 12px 12px; -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 80%); mask-image: radial-gradient(ellipse at center, #000 40%, transparent 80%); z-index: 1; }
+
+  .frame { position: absolute; inset: 70px; z-index: 5; display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .badge { background: var(--ink); color: #fff; padding: 10px 22px; font-weight: 700; letter-spacing: 3px; font-size: 13px; text-transform: uppercase; border-radius: 4px; }
+  .badge::before { content: '✱'; color: var(--coral); margin-right: 8px; }
+  .scribble-tag { font-family: var(--fhand); font-weight: 700; color: var(--ink); font-size: 30px; transform: rotate(-4deg); position: relative; padding: 2px 14px; }
+  .scribble-tag::before { content: ''; position: absolute; inset: -4px -10px; border: 3px solid var(--ink); border-radius: 50%; transform: rotate(-3deg); pointer-events: none; }
+
+  .eyebrow { font-family: var(--fs); font-weight: 700; font-size: 18px; letter-spacing: 4px; text-transform: uppercase; color: var(--coral); margin-top: 50px; }
+
+  .hero {
+    font-family: var(--fcond); font-style: italic; font-weight: 900;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-size: 460px; line-height: .85;
+    letter-spacing: -16px;
+    margin: -10px 0 0 -14px;
+    position: relative;
+  }
+  .hero em { color: var(--coral); font-style: italic; }
+  .hero small { font-size: 160px; vertical-align: top; letter-spacing: -6px; }
+
+  .unit { font-family: var(--fcond); font-weight: 900; font-style: italic; font-size: 60px; color: var(--ink); margin-top: 14px; text-transform: uppercase; letter-spacing: -1px; }
+  .desc { font-family: var(--fs); font-size: 22px; color: var(--ink); line-height: 1.5; margin-top: 18px; max-width: 720px; }
+  .desc strong { color: var(--coral); font-weight: 800; }
+
+  .stickers { display: flex; gap: 14px; margin-top: 28px; }
+  .stk { display: inline-flex; align-items: center; gap: 10px; font-family: var(--fs); font-weight: 800; font-size: 16px; padding: 14px 28px; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; }
+  .stk-y { background: var(--yellow); color: var(--ink); transform: rotate(-3deg); }
+  .stk-m { background: var(--mint);   color: #fff;       transform: rotate(2deg); }
+  .stk-c { background: var(--coral);  color: #fff;       transform: rotate(-3deg); }
+  .stk .ico { width: 22px; height: 22px; background: rgba(0,0,0,.18); border-radius: 50%; display: grid; place-items: center; font-size: 12px; }
+  .stk-m .ico, .stk-c .ico { background: rgba(255,255,255,.25); }
+
+  .bottom { margin-top: auto; display: flex; justify-content: space-between; align-items: center; border-top: 2px solid var(--ink); padding-top: 22px; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo .mark-l { width: 50px; height: 50px; background: var(--ink); border-radius: 10px; padding: 6px; }
+  .logo .mark-l img { width: 100%; height: 100%; object-fit: contain; }
+  .logo .wm { font-weight: 900; font-size: 18px; letter-spacing: .5px; line-height: 1; }
+  .logo .wm small { display: block; font-weight: 600; font-size: 10px; color: var(--muted); letter-spacing: 1.5px; margin-top: 4px; }
+  .meta { font-family: var(--fs); font-size: 16px; color: var(--ink); text-align: right; line-height: 1.4; font-weight: 600; }
+  .meta strong { font-weight: 800; }
+
+  .star { position: absolute; color: var(--ink); font-family: var(--fhand); font-weight: 700; z-index: 4; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="c-coral"></div>
+  <div class="c-mint"></div>
+  <div class="c-y"></div>
+  <div class="c-y2"></div>
+  <div class="halftone-tm"></div>
+  <div class="halftone-br"></div>
+
+  <span class="star" style="top: 280px; left: 60px; font-size: 26px; transform: rotate(15deg);">✦</span>
+  <span class="star" style="bottom: 260px; right: 280px; font-size: 24px; color: var(--coral); transform: rotate(-20deg);">✦</span>
+
+  <div class="frame">
+    <div class="top">
+      <span class="badge">SỐ LIỆU THẬT</span>
+      <span class="scribble-tag">JAVICO 2026</span>
+    </div>
+
+    <div class="eyebrow">Tỉ lệ visa đậu lần đầu</div>
+    <div class="hero"><em>98</em><small>%</small></div>
+    <div class="unit">SUỐT 14 NĂM</div>
+    <p class="desc"><strong>2.000+ hồ sơ</strong> đã đi Đài Loan qua JAVICO từ 2015. Quy trình chuẩn — không "100% đậu" sáo rỗng.</p>
+
+    <div class="stickers">
+      <span class="stk stk-y"><span class="ico">★</span>Hồ sơ chuẩn</span>
+      <span class="stk stk-m"><span class="ico">✓</span>Tư vấn chuyên sâu</span>
+      <span class="stk stk-c"><span class="ico">↗</span>Đậu lần đầu</span>
+    </div>
+
+    <div class="bottom">
+      <div class="logo">
+        <div class="mark-l"><img src="../img/Logo%20JVC%20unlock%20BG.png" alt="JAVICO"></div>
+        <div class="wm">JAVICO<small>DU HỌC ĐÀI LOAN</small></div>
+      </div>
+      <div class="meta"><strong>javico.vn</strong><br>0983 058 358</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
