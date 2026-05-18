@@ -1,6 +1,8 @@
-# 🚀 Commit + push lên GitHub — v3.0 Editorial Hero
+# 🚀 Commit + push lên GitHub — v3.1 Editorial Hero (100% SVG)
 
 > Sandbox không push trực tiếp được. Henry chạy các bước sau từ Terminal trên máy Mac.
+>
+> **v3.1 update**: Đã thay tất cả PNG silhouettes/doodles/stamps trong hero bằng inline SVG (scale crisp, không phụ thuộc PNG transparency, render đẹp ở mọi resolution).
 
 ---
 
@@ -61,37 +63,40 @@ new files (img/brand/):  17 assets (.jpg portraits + .png doodles/landmarks/stam
 
 ```bash
 git add .
-git commit -m "feat: hero v3.0 editorial — 2-col layout + PNG visuals + brand templates
+git commit -m "feat: hero v3.1 editorial — 2-col layout + 100% inline SVG visuals
 
 Hero (index.html + css/style.css):
 - Rebuild hero thành 2-column desktop layout (text trái, visual phải)
-- Right column composition với PNG assets thật:
-  • 臺 CJK stamp character backdrop (mint, 60vw)
-  • Sun disk coral top-left
-  • Halftone dot pattern overlay
-  • Taipei 101 silhouette (transparent PNG)
-  • Chiang Kai-shek Memorial silhouette
-  • 5 doodles: wavy mint, asterisk, squiggle, curl, dots cluster
-  • 3 birds Unicode swallows
+- Right column composition với 100% INLINE SVG (không PNG):
+  • 臺 CJK stamp character backdrop (mint text, 60vw)
+  • Sun disk coral top-left (CSS circle)
+  • Halftone dot pattern overlay (CSS radial-gradient + mask)
+  • Taipei 101 SVG silhouette (8 pagoda sections + antenna + windows)
+  • Chiang Kai-shek Memorial SVG (double-tiered roof + arch + columns)
+  • 4 SVG doodles: wavy mint, curl coral, asterisk 8-point, dots cluster
+  • 3 SVG bird/swallow arcs
   • Yellow circle stamp 'ONE TRIP / ĐỔI ĐỜI / ENDLESS POSSIBILITIES'
-  • Visa-approved stamp tilted -12deg
+  • SVG visa-approved stamp với <textPath> circular text (98% VISA ĐẬU)
 - Full-width black stat bar (10/2,000+/98%/20+) với Playfair italic numerals
 - Coral CTA banner với arrow → animation
 - Footer metadata strip (📅 tuyển sinh · 📍 VP · 🌐 website)
 - Hand-drawn 'ở ĐÀI BẮC' annotation giữ nguyên
 - Responsive: stack 1-col @1024px, simplified @720px, single-col stats @480px
 
+Why SVG over PNG:
+- Scale crisp ở mọi resolution (retina + 4K friendly)
+- Control 100% màu qua design tokens (--coral, --mint, --ink)
+- Không phụ thuộc PNG transparency (tránh bug background đen)
+- Lightweight: ~6KB inline thay vì 350KB+ PNG download
+- Editable trực tiếp trong code (không cần Photoshop)
+
 Brand assets (img/brand/):
-- 17 optimized assets (~1.8MB tổng)
-- 5 portraits JPG q82 (DHS + phụ huynh)
-- 2 landmarks PNG transparent (Taipei 101, Chiang Kai-shek)
-- 5 doodles PNG transparent (asterisk, curl, dots, squiggle, wavy-mint)
-- Stamps + textures (halftone, paper, visa-approved, gradcap icon)
+- 17 optimized assets giữ lại cho các trang/templates khác sử dụng
+- Hero KHÔNG còn dùng PNG nữa — tất cả là inline SVG
 
 Brand templates (/templates/):
 - 7 ready-to-use HTML files (key-visual, brand-guideline, A4 flyer,
-  FB cover, IG story, quote card, stat card) + gallery index + _lib.css
-- Zero external dependency (chỉ Google Fonts CDN)"
+  FB cover, IG story, quote card, stat card) + gallery index + _lib.css"
 
 git push origin main
 ```
@@ -107,22 +112,21 @@ git push origin main
 
 ## 📋 Tóm tắt thay đổi
 
-### Hero v3.0 — visual elements được thêm
+### Hero v3.1 — visual elements (100% inline SVG)
 
-| Element | Source | Position | Z-index |
+| Element | Implementation | Position | Z-index |
 |---|---|---|---|
-| 臺 CJK character | CSS text (mint) | Center back | 1 |
+| 臺 CJK character | CSS text (Noto Serif TC, mint) | Center back | 1 |
 | Sun disk | CSS circle (coral) | Top-left | 2 |
-| Halftone dots | CSS pattern (coral) | Top-right | 3 |
-| Wavy line mint | `doodle-wavyline-mint.png` | Mid-left | 4 |
-| Asterisk doodle | `doodle-asterisk.png` | Top-right | 4 |
-| Squiggle doodle | `doodle-squiggle.png` | Top-center | 4 |
-| Curl doodle | `doodle-curl.png` | Mid-right | 4 |
-| Dots cluster | `doodle-dots.png` | Bottom-mid | 4 |
-| Chiang Kai-shek | `landmark-chiangkaishek.png` | Bottom-left (46%) | 5 |
-| Taipei 101 | `landmark-taipei101.png` | Bottom-right (28%) | 5 |
-| Birds (Unicode ↝) | CSS text | Top-mid | 6 |
-| Visa-approved stamp | `stamp-visa-approved.png` | Top-center (-12deg) | 7 |
+| Halftone dots | CSS radial-gradient + mask | Top-right | 3 |
+| Wavy line mint | inline SVG path | Mid-left | 4 |
+| Curl coral | inline SVG path | Top-right | 4 |
+| Asterisk 8-point | inline SVG (4 lines) | Top-center | 4 |
+| Dots cluster | inline SVG (7 circles, yellow) | Bottom-right | 4 |
+| Chiang Kai-shek | inline SVG (roof+arch+columns) | Bottom-left (52%) | 5 |
+| Taipei 101 | inline SVG (8 pagoda sections) | Bottom-right (18%) | 5 |
+| Birds (3) | inline SVG arcs | Top-mid | 6 |
+| Visa-approved stamp | inline SVG + `<textPath>` | Top-center (-10deg) | 7 |
 | Yellow circle stamp | CSS div | Bottom-right | 8 |
 
 ### Files modified

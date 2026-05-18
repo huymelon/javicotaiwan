@@ -2155,74 +2155,70 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: non
   z-index: 3;
 }
 
-/* Doodles (decorative PNGs) */
-.hv-doodle {
+/* Inline SVG decorative elements (replaces all PNGs) */
+.hv-svg {
   position: absolute;
   pointer-events: none;
   user-select: none;
+  display: block;
+  height: auto;
+}
+
+/* Doodles z-index 4 */
+.hv-svg.hv-wavy {
+  bottom: 36%; left: 6%;
+  width: 36%; max-width: 240px;
+  transform: rotate(-3deg);
   z-index: 4;
 }
-.hv-wavy {
-  bottom: 38%; left: 8%;
-  width: 28%; max-width: 220px;
-  transform: rotate(-4deg);
-  opacity: .92;
-}
-.hv-aster {
-  top: 18%; right: 14%;
-  width: 64px; height: 64px;
-  transform: rotate(12deg);
-}
-.hv-squiggle {
-  top: 8%; right: 38%;
-  width: 90px; height: auto;
-  transform: rotate(-8deg);
-  opacity: .85;
-}
-.hv-curl {
-  bottom: 14%; right: 8%;
-  width: 110px; height: auto;
+.hv-svg.hv-curl {
+  top: 14%; right: 8%;
+  width: 90px;
   transform: rotate(8deg);
-  opacity: .9;
+  z-index: 4;
 }
-.hv-dots {
-  bottom: 8%; left: 30%;
-  width: 80px; height: auto;
-  opacity: .8;
+.hv-svg.hv-aster {
+  top: 10%; right: 32%;
+  width: 44px; height: 44px;
+  transform: rotate(15deg);
+  z-index: 4;
+}
+.hv-svg.hv-dots {
+  bottom: 30%; right: 10%;
+  width: 72px;
+  z-index: 4;
 }
 
-/* Landmarks */
-.hv-cks {
-  position: absolute;
+/* Landmarks z-index 5 */
+.hv-svg.hv-cks {
   bottom: 0; left: 4%;
-  width: 46%; max-width: 280px;
-  height: auto;
+  width: 52%; max-width: 320px;
   z-index: 5;
-  filter: drop-shadow(0 6px 18px rgba(0,0,0,.18));
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.12));
 }
-.hv-taipei101 {
-  position: absolute;
-  bottom: 0; right: 6%;
-  width: 28%; max-width: 170px;
-  height: auto;
+.hv-svg.hv-taipei101 {
+  bottom: 0; right: 4%;
+  width: 18%; max-width: 90px;
   z-index: 5;
-  filter: drop-shadow(0 6px 18px rgba(0,0,0,.22));
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.14));
 }
 
-/* Birds */
-.hv-bird {
-  position: absolute;
-  font-family: var(--font-sans);
-  color: var(--ink);
-  font-size: 28px; font-weight: 900;
+/* Birds (SVG arcs) z-index 6 */
+.hv-svg.hv-bird {
+  width: 36px;
   z-index: 6;
-  user-select: none;
-  pointer-events: none;
-  line-height: 1;
 }
-.hv-bird.b1 { top: 14%; left: 18%; transform: rotate(-20deg); }
-.hv-bird.b2 { top: 22%; left: 32%; transform: rotate(-10deg); font-size: 22px; }
-.hv-bird.b3 { top: 16%; right: 28%; transform: rotate(8deg); font-size: 20px; }
+.hv-svg.hv-bird.b1 { top: 18%; left: 22%; transform: rotate(-18deg); }
+.hv-svg.hv-bird.b2 { top: 26%; left: 36%; transform: rotate(-6deg); width: 28px; }
+.hv-svg.hv-bird.b3 { top: 16%; right: 42%; transform: rotate(10deg); width: 24px; }
+
+/* Visa stamp z-index 7 */
+.hv-svg.hv-visa-stamp {
+  top: 18px; left: 50%;
+  width: 110px;
+  transform: translateX(-50%) rotate(-10deg);
+  z-index: 7;
+}
 
 /* Yellow circle stamp positioned bottom-right inside visual */
 .hero-editorial .hv-stamp {
@@ -2242,15 +2238,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: non
   margin: 4px 0;
 }
 
-/* Visa-approved stamp */
-.hv-visa-stamp {
-  position: absolute;
-  top: 18px; left: 50%;
-  transform: translateX(-50%) rotate(-12deg);
-  width: 92px; height: auto;
-  z-index: 7;
-  opacity: .92;
-}
+/* (legacy .hv-visa-stamp PNG rule removed — replaced by .hv-svg.hv-visa-stamp above) */
 
 /* === Full-width black stat bar === */
 .hero-statbar {
@@ -2374,12 +2362,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: non
     font-size: 9px; padding: 14px;
   }
   .hero-editorial .hv-stamp strong { font-size: 15px; }
-  .hv-visa-stamp { width: 64px; }
-  .hv-squiggle, .hv-dots { display: none; }
-  .hv-aster { width: 44px; height: 44px; }
-  .hv-curl { width: 70px; }
+  .hv-svg.hv-visa-stamp { width: 72px; }
+  .hv-svg.hv-dots { display: none; }
+  .hv-svg.hv-aster { width: 36px; height: 36px; }
+  .hv-svg.hv-curl { width: 60px; }
   .hv-halftone { width: 110px; height: 60px; }
-  .hv-bird.b3 { display: none; }
+  .hv-svg.hv-bird.b3 { display: none; }
   .hero-cta-banner { font-size: 16px; padding: 18px var(--gap); }
   .hero-footmeta { gap: 14px 18px; font-size: 12px; padding: 14px var(--gap); }
 }
@@ -2388,6 +2376,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: non
   .hs-card { padding: 14px 0 !important; border-right: 0 !important; border-bottom: 1px solid rgba(255,255,255,.12); }
   .hs-card:last-child { border-bottom: 0; }
   .hero-cta-banner { gap: 10px; font-size: 14px; }
-  .hv-bird, .hv-dots { display: none; }
+  .hv-svg.hv-bird, .hv-svg.hv-dots { display: none; }
 }
 
