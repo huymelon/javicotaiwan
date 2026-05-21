@@ -21,6 +21,7 @@
         <a href="cac-he.html" data-page="cac-he">Các hệ</a>
         <a href="chi-phi.html" data-page="chi-phi">Chi phí</a>
         <a href="truong-doi-tac.html" data-page="truong-doi-tac">Trường đối tác</a>
+        <a href="/blog/" data-page="blog">Blog</a>
         <a href="dang-ky.html" data-page="dang-ky">Liên hệ</a>
       </nav>
       <div class="nav-cta">
@@ -36,6 +37,7 @@
       <a href="cac-he.html" data-page="cac-he">Các hệ đào tạo</a>
       <a href="chi-phi.html" data-page="chi-phi">Chi phí</a>
       <a href="truong-doi-tac.html" data-page="truong-doi-tac">Trường đối tác</a>
+      <a href="/blog/" data-page="blog">Blog</a>
       <a href="dang-ky.html" data-page="dang-ky">Đăng ký tư vấn</a>
       <div class="mm-cta">
         <a href="tel:0983058358" class="btn btn-outline">📞 Gọi</a>
@@ -65,6 +67,7 @@
         <h4>Du học</h4>
         <ul>
           <li><a href="cac-he.html">Các hệ đào tạo</a></li>
+          <li><a href="cac-he.html#dieu-duong">Điều dưỡng (học bổng toàn phần)</a></li>
           <li><a href="cac-he.html#vhvl">Vừa học vừa làm</a></li>
           <li><a href="cac-he.html#du-bi">Hệ Dự Bị 1+4</a></li>
           <li><a href="cac-he.html#thac-si">Hệ Thạc Sĩ</a></li>
@@ -77,6 +80,9 @@
           <li><a href="truong-doi-tac.html">Trường đối tác</a></li>
           <li><a href="chi-phi.html">Chi phí</a></li>
           <li><a href="chi-phi.html#goi-dich-vu">Gói dịch vụ</a></li>
+          <li><a href="chi-phi.html#tocfl">Khóa tiếng Trung TOCFL</a></li>
+          <li><a href="chi-phi.html#chung-thuc">Dịch vụ chứng thực</a></li>
+          <li><a href="chi-phi.html#hoc-bong-moe">Săn học bổng MOE</a></li>
           <li><a href="chi-phi.html#cam-ket">Cam kết hoàn tiền</a></li>
           <li><a href="index.html#faq">Câu hỏi thường gặp</a></li>
         </ul>
